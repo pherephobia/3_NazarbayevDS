@@ -1,0 +1,11 @@
+"0","theme_set(theme_minimal(base_family = ""Montserrat"") + 
+    tomtom::theme_538() +
+    theme(
+      axis.text = element_text(family = base_family),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank(),
+      plot.background = element_rect(fill = ""white"", color = ""white"")
+  ))
+"
+"2","에러: 객체 'base_family'를 찾을 수 없습니다
+"

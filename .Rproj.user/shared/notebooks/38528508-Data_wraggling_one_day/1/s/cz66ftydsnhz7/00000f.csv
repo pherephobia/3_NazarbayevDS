@@ -1,0 +1,4 @@
+"0","if (!require(democracyData)) install_github(""xmarquez/democracyData"")
+"
+"2","필요한 패키지를 로딩중입니다: democracyData
+"

@@ -1,0 +1,111 @@
+---
+title: "슬기로운 통계생활 Rmd 템플릿 사용 예"
+author: "Issac Lee"
+date: "`r format(lubridate::ymd(Sys.Date()), '%Y년 %m월 %d일')`"
+output:
+    pdf_document:
+        latex_engine: xelatex
+        highlight: arrow
+        template: "statplaybook.tex"
+chapnumber: true
+watermark: "logo.jpg"
+pagelscape: true
+themecolor: midnightblue
+---
+
+```{r setup, include=FALSE}
+# 필요한 패키지 불러오기
+library(tidyverse)
+library(mosaic)
+library(palmerpenguins)
+library(showtext)
+
+# font 등록
+font_add_google(name = "Noto Serif KR",
+                family = "noto-serif")
+
+# showtext 기능 켜기
+showtext_auto(TRUE)
+theme_set(theme_minimal(base_family = "noto-serif",
+                        base_size = 10))
+```
+
+\chapter{문서 작성 예시}
+
+# 이차형식(Quadratic form)
+
+이차 형식은 벡터와 행렬을 이용하여 이차식(quadratic expression)을 표현하는 방법입니다.
+
+$$
+f(x_1) = a x_1^2 + bx_1 + c
+$$ 의 식을 $a, b, c$가 상수이고, $a \ne 0$ 일 때, $x_1$에 대한 2차식이라고 부릅니다. 이러한 것을 변수가 여러 개인 것으로 확장 시킬 수 있는데,
+
+$$
+q(x_1, x_2) = 6 x_1^2 + 4 x_1 x_2 + 9 x_2^2
+$$ 처럼 생긴 식을 두 개 변수 $x_1$과 $x_2$에 대한 이차 형식이라고 부릅니다. 주어진 이차식을 벡터와 행렬을 사용하여 이차 형식으로 나타내면 다음과 같습니다.
+
+$$
+q(x_1, x_2) = \begin{bmatrix} x_1 & x_2 \end{bmatrix} \begin{bmatrix} 6 & 2 \\ 2 & 9 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \mathbf{x}^\top \boldsymbol{A} \mathbf{x}
+$$ 여기서 벡터 $$\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$$ 이고, 행렬 $$\boldsymbol{A} = \begin{bmatrix} 6 & 2 \\ 2 & 9 \end{bmatrix}$$ 입니다. 여기서 주의해야 할 점은 위의 행렬 $A$ 만이 주어진 2차식을 만들어내는 행렬이 아니라는 점 입니다. 다음 $B$ 행렬을 사용하여 이차 형식을 전개해보면, 똑같은 2차식을 만들 수 있습니다. $$\boldsymbol{B} = \begin{bmatrix} 6 & 1 \\ 3 & 9 \end{bmatrix}$$ 하지만, 이러한 모든 이차식에 대하여 그것과 일치하는 이차형식을 만들어내는 대칭 행렬은 유일하게 존재합니다. 그리고 이러한 대칭행렬은 주어진 식을 만들어내는 행렬 $B$를 찾았다면, 다음과 같은 식을 사용해서 찾을 수 있습니다.
+
+# 이차 형식 시각화
+
+이제 각 분류에 대한 가장 간단한 이차형식을 시각화해 보겠습니다. R 코드를 사용하여 다음과 같이 작성할 수 있습니다.
+
+```{r message=FALSE, warning=FALSE}
+plot_quadratic_form <- function(formula) {
+  plotFun(formula,
+          x1.lim = range(-10, 10),
+          x2.lim = range(-10, 10),
+          xlab = expression(x[1]),
+          ylab = expression(x[2]),
+          zlab = expression(Q(x[1], x[2]),
+          alpha = 0.5)
+  )
+}
+```
+
+다음 코드는 이차형식의 각 케이스에 대하여 -10에서 10사이 범위에서 시각화 하는 코드입니다. 각각에 해당하는 행렬은 다음과 같습니다.
+
+```{r}
+mat_PD  <- matrix(c(1, 0, 0, 1), 2, 2)
+mat_PD
+mat_PSD <- matrix(c(1, 1, 1, 1), 2, 2)
+mat_PSD
+```
+
+Side-by-side 그래프 예시입니다.
+
+```{r echo=FALSE, fig.cap="Positive Definite vs. Positive Semi-Definite", fig.show = "hold", out.width="50%"}
+# Positive Definite (PD)
+plot_quadratic_form(x1^2 + x2^2 ~ x1 & x2)
+
+# Positive Semi-Definite (PSD)
+plot_quadratic_form(x1^2 + 2 * x1 * x2 + x2^2 ~ x1 & x2)
+```
+
+\blandscape
+
+-   가로 페이지 예시
+
+```{r echo=FALSE}
+mtcars |> head() |> knitr::kable()
+```
+
+\elandscape
+
+# 그래프에 한글 넣기
+
+한글을 넣기 위해서 `showtext`를 사용하면 그래프에 한글도 자유롭게 넣을 수 있습니다.
+
+```{r plot-penguins, warning=FALSE, echo=FALSE, fig.cap="날개와 부리길이 시각화"}
+ggplot(penguins, 
+       aes(x = flipper_length_mm, y = bill_length_mm)) +
+  geom_point(aes(color = species)) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(
+    subtitle = "팔머 펭귄 종별 비교",
+    x = "날개 길이 (mm)", y = "부리 길이 (mm)",
+    color = "펭귄 종"
+  )
+```

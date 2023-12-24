@@ -1,0 +1,442 @@
+---
+title: "0. Syllabus Day"
+subtitle: "POLI315 International Relations"
+author: "Sanghoon Park"
+date: "University of South Carolina"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["uofscstyle.css", "uofscfont.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      self-contained: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+xaringanExtra::use_panelset()
+```
+
+class: middle, center, reduced_opacity
+background-size: 100%
+background-image: url(https://24.media.tumblr.com/tumblr_lxjcnkxslo1r3ron1o1_500.gif)
+
+# <span style="color:white">Welcome to Spring 2022 and POLI315!</span>
+ 
+
+---
+class: top
+
+# Let Me Introduce Myself
+
+.pull-left[
+```{r, echo = F, out.width="85%"}
+knitr::include_graphics("Sanghoon_avatar2.jpg")
+```
+]
+.pull-right[
+## Sanghoon Park
+### [sanghoon-park.com](sanghoon-park.com)
+### [sp23@email.sc.edu](sp23@email.sc.edu)
+### [calendly.com/sanghoon/15min?month=2021-08](https://calendly.com/sanghoon/15min?month=2021-08)
+### Office: #305 Gambrell
+### Online by appointment
+]
+
+---
+
+background-size: 63%
+background-position: 91% 61%
+background-image: url("w1_officehours1.png")
+
+# Office Hours
+
+---
+
+background-size: 65%
+background-position: 91% 61%
+background-image: url("w1_officehours2.png")
+
+# Office Hours
+
+---
+class: top
+
+# Let Me Introduce Our Teaching Assistant
+.pull-left[
+```{r, echo = F, out.width="85%"}
+knitr::include_graphics("spencer-avatar.png")
+```
+]
+.pull-right[
+## Baily Spencer
+### [BAILY@email.sc.edu](BAILY@email.sc.edu)
+### Office: #303 Gambrell
+### Wednesday 3:30-5:30PM
+]
+---
+
+# Course Description
+
+--
+
++ This course aims to introduce students to the academic field of **International Relations (IR)**.
+
+--
+
++ We will explore diverse theories, significant historical events, actors, institutions, and global trends.
+
+--
+
++ Given the field’s breadth, clearly only a sampling of topics can be covered. 
+
+--
+
+  + Introduction to social science research in International Relations
+
+  + Leading schools of thought in International Relations, their evolution, and historical
+events that shaped our world and perceptions of that world.
+  
+  + Several topics in International Relations and International Political Economy
+  
+---
+
+# Course Objective
+
+As a result of the class, students will be able to:
+
+--
+
++ have some basic knowledge of the definition of International Relations and the different approaches of studying International Relations.
+
++ identify and describe dominant topics and concepts related to International Relations.
+
++ obtain comprehensive understanding of the International Relations.
+
++ sharpen research and critical thinking skills.
+
+
+---
+background-image: url("EIRcover.jpg")
+background-position: 9% 61%
+background-size: 200pt
+
+# Required Readings
+
+.left-column[
+
+
+]
+
+.right-column[
+
+## Textbook
+
+Mingst, Karen A. and Heather Elko McKibben. 2021. *Essentials of International Relations*. Nineth edition. New York, NY: W.W. Norton & Company. (Hereafter <i>.p2-red[EIR]</i>)
+
++ Please access Norton's resources through our Blackboard course page.
+
+]
+
+---
+background-image: url("Handbookcover.jfif")
+background-position: 9% 61%
+background-size: 185pt
+
+# Required Readings
+
+.left-column[
+
+
+]
+
+.right-column[
+
+## Textbook
+
+Bueno de Mesquita, Bruce and Alastair Smith. 2011. *The Dictator’s Handbook: Why Bad Behavior is Almost Always Good*. New York, NY: Public Affairs. (Hereafter <i>.p2-red[Handbook]</i>)
+
++ The eBook is available free through Thomas Cooper Library. Please see the link on the main menu. 
+
++ An audio version of the book is available on the YouTube Playlist.
+
+
+]
+
+
+---
+
+# Course Policy
+
+*Failure to follow class rules will affect the student’s participation grade.*
+
+--
+
+1.  The use of cell phones is .p1-red[*not*] permitted.
+
+2.  Computers are allowed to take notes .pi-red[*only*].
+
+3.  Please do .p1-red[*not*] read outside materials.
+
+4.  Sleeping in class is .p1-red[*not*] allowed.
+
+5.  Grades will .p1-red[*not*] be changed if an issue is reported after two weeks have passed.
+
+
+---
+# Grading Policy
+
+.pull-left[
+
+## Letter Grades and Scores
+
+```{r, fig.show='hide', message=F, error=F, echo = F}
+library(tidyverse)
+tibble(
+  Grade = c("A", "B+", "B", "C+", "C", "D+", "D", "F"),
+  Score = c(
+    "90-100", "87-99", "80-86", "77-79", "70-76", "67-69", "60-66", "0-59")) %>%
+  kableExtra::kbl() %>% 
+  kableExtra::kable_paper(bootstrap_options = c("hover"),
+                          full_width = T,
+                          font_size = 18)
+
+```
+]
+
+--
+
+.pull-right[
+
+## Course Requirements
+
+```{r, fig.show='hide', message=F, error=F, echo = F}
+tibble(
+  Requirements = c("Current Event Presentation", 
+                   "Norton’s InQuizitive Quizzes", 
+                   "Midterm & Final Exams", 
+                   "Attendance",
+                   "Total"),
+  `%` = c(
+    "20", "20", "50", "10", "100")) %>%
+  kableExtra::kbl() %>% 
+  kableExtra::kable_paper(bootstrap_options = c("hover"),
+                          full_width = T,
+                          font_size = 18)
+
+```
+
+]
+
+---
+
+# Summary of Requirements
+## Current Event Presentation (20%)
+
++ In groups of 4-5 students will give a 10-15 minute presentation on a current event featuring information from at least two reputable sources from February 1st to April 21st.
+
+  + The Onion, for example, does NOT count for your presentations. However, I always enjoy being alerted to relevant satirical foreign policy articles. 
+
+--
+
+  + Submit your **first and second preferences** for the presentation dates to your TA ([BAILY@email.sc.edu](BAILY@email.sc.edu)) by the third class (5pm on 18th January).
+  
+  + I will upload a copy of this sign-up sheet to Blackboard. 
+
+---
+
+# Summary of Requirements
+## Current Event Presentation (20%)
+
+The presentation should include:
+
+1. a brief summary of the article (one paragraph—do NOT just read the article aloud!) and surrounding contextual events, if needed for others’ understanding.
+
+2.	a mini analysis of the current events as they relate to class material. Your articles should relate to the topics already covered or currently being covered in lecture and recitation. Recall that the goal is to be able to connect theory to relevant international events!
+
+3.	3 discussion questions to ask the rest of the class to initiate conversation on the issue
+
+---
+
+# Summary of Requirements
+## Current Event Presentation (20%)
+
+Please email your TA ([BAILY@email.sc.edu](BAILY@email.sc.edu)) the two articles your group has chosen for the class by no later than 5:00 PM the day before. Please make an appointment or talk to one of us during office hours if you have any questions.
+
+In addition, students who are not presenting are expected to pay attention to and keep track of these current events. They will constitute part of your exam material.
+
+
+---
+
+# Summary of Requirements
+## Norton’s InQuizitive Quizzes (2% × 10 = 20%)
+
+You should purchase access to Norton’s InQuisitive software and sign up for Norton’s InQuizitive program through Blackboard.
+
++ Introduction of InQuizitive Quizzes: [http://books.wwnorton.com/books/inquizitive/overview/](http://books.wwnorton.com/books/inquizitive/overview/)
+
+  + [Blackboard] - [Syllabus and Schedule] - [A NOTE ABOUT INQUIZITIVE]
+
++ How to use InQuizitive Quizzes?: [https://ncia.wwnorton.com/168310](https://ncia.wwnorton.com/168310)
+
+  + [Blackboard] - [Norton Textbook Materials] - [InQuizitive: How to Use InQuizitive]
+
+---
+
+# Summary of Requirements
+## Norton’s InQuizitive Quizzes (2% × 10 = 20%)
+
+It contains an electronic version of the textbook and an adaptive learning system.
+
+Students must complete the quiz before the deadline to receive credit on it. You may complete the quiz as much as you want **before the deadline** but will not be able to change your grade after the deadline. **We will drop your lowest quiz score.**
+
+**Read the schedules for Norton's InQuizitive Quizzes in the syllabus carefully!**
+  
+---
+
+# Summary of Requirements
+
+## Midterm and Final Exams (25% × 2 = 50%)
+
+### Midterm: Thursday, March 17th from 2:50 pm to 4:05 pm
+
++ The midterm exam will cover material from classes between 1/13 and 3/15.
+
+### Final:  Thursday, April 28th from 2:50 pm to 4:05 pm
+
++ The final exam will cover material from classes between 3/22 and 4/26.
+
+<usc-blockquote> More details about exams will be provided closer to exam time.</usc-blockquote>
+
+---
+
+# Summary of Requirements
+
+## Midterm and Final Exams (25% × 2 = 50%)
+### Makeup Exams
+
+Makeup exams will only be given if you provide documentation that the university approved you missing the exam. If you experience severe illness, hospitalization, death in the family, or other tragedies, **please contact the Student Ombudsman’s Office** and provide them with documentation to have your absence approved. They will notify your instructors if your absence is excused. 
+
+Exam format for makeup exams may be different from the original exam and will likely utilize a short answer format. An oral examination may also be utilized if deemed appropriate by the instructor.
+
+---
+# Summary of Requirements
+## Technology Requirements
+
+Please familiarize yourself with Blackboard during the first week of classes.
+
+We do not accept assignments submitted through email. 
+
++ They must be submitted as described on the assignment and through Blackboard.
+
++ Blackboard requires documents to be submitted in WORD or PDF format. Otherwise, we cannot read your submission.
+
+---
+# Summary of Requirements
+## Technology Requirements
+
+If you have problems or questions about computer technology or Blackboard, **please contact the Division of Information Technology’s (DoIT’s) Service Desk** at (803) 777-1800 or submit an online request through the Self-Service Portal or visit Carolina Tech Zone.
+
+If you have problems with Norton’s Inquizitive Program or access to their textbook, you  must contact **Norton’s help desk directly** ([https://wwnorton.knowledgeowl.com/
+help/inquizitive-instructors-introduction#what-is-inquizitive-](https://wwnorton.knowledgeowl.com/
+help/inquizitive-instructors-introduction#what-is-inquizitive-)) 
+
+If you contact DoIT or Norton with a technology problem, make sure you save your documents with the case number.
+
+---
+# Grade Appeals
+
+We maintain a 24-hour cooling-off period that students must observe after receiving graded exams or assignments. If you think there was an error in your grade, please wait to write to the TA or instructor until after 24 hours. 
+
+The teaching assistant will grade **a large share of the work** in this course. He will be your first point of contact on questions about the course and grade appeals. 
+
+The teaching assistant and instructor will **only consider grade disputes submitted in writing and contain sufficient evidence of an error in grading**. If the case is reviewed, the outcome may result in a higher OR lower exam score than initially received.
+
+---
+# Attendance Policy
+
+Students are expected to attend each scheduled class meeting, to be on time, and to be prepared for each class session. 
+
+The University attendance policy specifies that students may miss up to 3 class meetings (10% of class time) without penalty. 
+
+---
+# Attendance Policy
+
+Students who have been diagnosed with COVID-19 or have been exposed and require quarantining should complete the COVID-19 Student Report Form. The Student Ombudsman will verify documentation of a positive COVID-19 test or need to quarantine.
+
+If you have military or other university documentation that permits you to miss class (e.g., formal organizations), please send a copy of the documents to your teaching assistant. If not, you must get approval from the Student Ombudsman to have your absence approved.
+
+---
+# Attendance Policy
+## Important Notes
+You are responsible for all material covered in class and for all other tasks assigned for completion outside of class.
+
+## Late Work/Make-up Policy
+All readings, quizzes, and exams are due by the deadline, as posted on the course schedule. You must have documentation to request an absence be excused.
+
+---
+# Other Policies
+## E-mail Policy
+I am usually quick to respond to student e-mails. However, I have a policy that why I will not respond to certain e-mails students send. Multiple rationales are there. Please read .p1-red[E-mail Policy] section in the syllabus *carefully*.
+
+## Academic Dishonesty Policy
+I will enforce rigorous standards of academic integrity in all aspects of this course.  For the detailed policy, see [the University Honor Code: Academic Responsibility – The Honor Code](http://www.sc.edu/policies/ppm/staf625.pdf).
+
+---
+# Other Policies
+## Personal Integrity
+
+I will not tolerate discrimination and harassment on the basis of identity or status, including race, color, national origin, religion, sex, gender, age, disability, sexual orientation, genetics, or veteran status. 
+
+For more information on the University Student Non-Discrimination and Non-Harassment Policy, see [Student Non-Discrimination and Non-Harassment Policy](https://www.sc.edu/about/offices_and_divisions/equal_opportunities_programs/documents/student_non-discrimination_and_non-harassment_policy.pdf).
+
+---
+# Other Policies
+## Accommodations
+If you are a person with a disability and anticipate needing any type of accommodation in order to participate in this class, please advise me and make appropriate arrangements with the Student Disability Resource Center (https://sc.edu/about/offices_and_divisions/student_disability_resource_center/)
+
+---
+# Other Policies
+## Inclass Masks Policies
+
+*Updated*: South Carolina Supreme Court ruling on August 18th 2021 clears the way for the university to require face coverings on our campus. According to the mail from interim president, Harris Pastides:
+
+<usc-blockquote> [i]t is the responsibility of all members of our Gamecock community to help protect ourselves and others by adopting sound public health practices as we continue our efforts to safeguard our campus against this still-evolving health concern.</usc-blockquote>
+
+Following [CDC guidelines](https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html), **I strongly recommend/urge/encourage you to wear a mask in class on Tuesdays and Thursdays** regardless of your vaccination status.
+
+---
+
+background-image: url("SP22POLI315_calendar.png")
+background-size: 78%
+background-position: 50% 75%
+
+# Class Schedule
+
+---
+class: center, middle
+background-image: url(https://raw.githubusercontent.com/pherephobia/usc_logo/main/UofSC_Primary_RGB_G.png)
+background-size: 300px
+background-position: 11% 15%
+
+# Thanks!
+
+## Please do not hesitate to ask questions.
+
+Contacts for Instructor and Teaching Assistant
+
+|                   Contact                                                                          |     Sanghoon Park                                    |   Spencer Baily                            |
+| :-----------------------------------------------: | :--------------------------------------------------: | :----------------------------------------: |
+| `r icons::fontawesome("paper-plane")`           | [sp23@email.sc.edu](sp23@email.sc.edu)               |  [BAILY@email.sc.edu](BAILY@email.sc.edu)  |
+| `r icons::fontawesome("id-card")`                 | [sanghoon-park.com/](https://www.sanghoon-park.com/) |                                            |
+| `r icons::fontawesome("building")`                | #305 Gambrell                                        | #303 Gambrell                              |
+
+```{r, echo = F, eval = F, message = F, warning=F, results='hide'}
+xaringanBuilder::build_pdf("POLI315-W1-1.html",
+                           complex_slides = F, 
+                           partial_slides = F)
+```
+

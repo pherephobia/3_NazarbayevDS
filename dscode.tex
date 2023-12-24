@@ -1,0 +1,154 @@
+% inspired by HzGuide
+% created by Issac Lee (https://github.com/issactoast)
+% distributed by Statistics playbook (https://statisticsplaybook.com)
+% last modified in Nov 19, 2023
+
+\documentclass{memoir}
+
+% Package imports.
+\usepackage{fapapersize}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{hyperref}
+%\usepackage[hangul]{xetexko}
+\usepackage{titling} % Customize the title
+\usepackage{titlesec}
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage{longtable} % for kable()
+%\usepackage{kotex} % kor in plot
+
+\definecolor{midnightblue}{HTML}{191970}
+\definecolor{darkgreen}{RGB}{0,50,0}
+
+\ifxetex
+\else
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{fontspec}
+\setmainfont[Path = "D:/Dropbox/Scholar/2_Graduates/2024-01-Spring/3_NazarbayevDS/otf/",
+ Extension = .otf,
+ UprightFont = *-Regular,
+ BoldFont = *-Bold,
+ ItalicFont = *-Italic]{PublicSans}
+
+%\setmainhangulfont{Noto Serif CJK KR}[BoldFont={* Bold}]
+%\setsanshangulfont{Noto Sans CJK KR}[BoldFont={* Medium}]
+\setmonofont[Path = "D:/Dropbox/Scholar/2_Graduates/2024-01-Spring/3_NazarbayevDS/D2CodingLigature/",
+  Extension = .ttf]{D2Coding-Ver1.3.2-20180524-ligature}
+
+%\newcommand\prenum{제}
+%\xspaceaddexceptions{의 에 은 는 이 가 을 를 와 과 로 으 \으로 \은 \는 \이 \가 \을 \를 \와 \과}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+
+% Watermark function
+$if(watermark)$
+\usepackage{background}
+\backgroundsetup{
+  scale=1,
+  color=black,
+  opacity=1,
+  angle=0,
+  pages=all,
+  contents={%
+  \includegraphics[width=\paperwidth,height=\paperheight]{$watermark$}
+  }%
+}
+$endif$
+
+$if(pagelscape)$
+\usepackage{pdfpages}
+\usepackage{pdflscape} % 문서회전을 위한 패키지 로딩
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+$endif$
+
+\makepagestyle{plain}
+\makeevenfoot{plain}{}{\thepage}{}
+\makeoddfoot{plain}{}{\thepage}{}
+\pagestyle{plain}
+
+% 편집용지(가로), 편집용지(세로), 왼,오른,위,아래
+\usefapapersize{210mm, 297mm, 25mm, 25mm, 25mm, 25mm}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=midnightblue,
+    filecolor=magenta,      
+    urlcolor=midnightblue,
+}
+
+% 챕터 정렬
+\titlespacing*{\chapter}{0pt}{10pt}{50pt}
+
+$if(chapnumber)$
+\titleformat{\chapter}[display]
+    $if(themecolor)$
+        {\normalfont\color{$themecolor$}\huge\bfseries\raggedleft} % 색깔 변경
+    $else$
+        {\normalfont\huge\bfseries\raggedleft} % 색깔 변경
+    $endif$
+    {\prenum \thechapter \chaptertitlename}{20pt}{\Huge}
+    \pagestyle{plain}
+$else$
+\titleformat{\chapter}[display]
+    $if(themecolor)$
+        {\normalfont\color{$themecolor$}\huge\bfseries\raggedleft} % 색깔 변경
+    $else$
+        {\normalfont\huge\bfseries\raggedleft} % 색깔 변경
+    $endif$
+    {}{20pt}{\Huge}
+    \pagestyle{plain}
+$endif$
+
+% 섹션 제목 색깔 변경
+$if(themecolor)$
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{$themecolor$}}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{$themecolor$}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{$themecolor$}}
+  {\thesubsubsection}{1em}{}
+$endif$
+
+% 섹션 번호 조정
+\renewcommand\thesection{\arabic{section}.}
+
+
+\begin{document}
+
+$if(title)$
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+\Huge\textbf{$title$}
+\end{center}
+$if(author)$
+\begin{center}
+\LARGE{$author$}\\[0.5em] % 저자, 그 아래로 0.5em 간격을 둡니다.
+\end{center}
+$endif$
+\begin{center}
+\normalsize{$date$} % 날짜
+\end{center}
+\vspace*{\fill}
+\vspace*{\fill}
+$endif$
+
+% This is the "magic" pandoc variable. (This is where your Rmarkdown document is inserted.)
+
+$body$
+
+\end{document}
