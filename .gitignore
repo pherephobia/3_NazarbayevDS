@@ -3,5 +3,12 @@
 .RData
 .Ruserdata
 .DS_Store
-.pdf
-.Rmd
+*.pdf
+*.Rmd
+슬기로운통계생활-Qmd작성예시.pdf
+슬기로운통계생활-Qmd작성예시.qmd
+슬기로운통계생활-Rmd작성예시.Rmd
+슬기로운통계생활-Rmd작성예시.pdf
+슬기로운통계생활-템플릿설명서(ver1.0).pdf
+*.tex
+otf/
