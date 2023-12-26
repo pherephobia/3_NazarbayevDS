@@ -51,7 +51,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/quarto.js"></script>
@@ -125,60 +144,65 @@ background: #EBA900;
   <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#attention" id="toc-attention" class="nav-link active" data-scroll-target="#attention"><span class="header-section-number">1</span> Attention!</a></li>
-  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages"><span class="header-section-number">2</span> Load Packages</a></li>
-  <li><a href="#example-data-in-use" id="toc-example-data-in-use" class="nav-link" data-scroll-target="#example-data-in-use"><span class="header-section-number">3</span> Example Data in Use</a></li>
+<li><a href="#attention" id="toc-attention" class="nav-link active" data-scroll-target="#attention">Attention!</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">Load Packages</a></li>
+  <li><a href="#example-data-in-use" id="toc-example-data-in-use" class="nav-link" data-scroll-target="#example-data-in-use">Example Data in Use</a></li>
   <li>
-<a href="#incomplete-data-what-does-it-mean" id="toc-incomplete-data-what-does-it-mean" class="nav-link" data-scroll-target="#incomplete-data-what-does-it-mean"><span class="header-section-number">4</span> Incomplete Data, what does it mean?</a>
+<a href="#incomplete-data-what-does-it-mean" id="toc-incomplete-data-what-does-it-mean" class="nav-link" data-scroll-target="#incomplete-data-what-does-it-mean">Incomplete Data, what does it mean?</a>
   <ul>
-<li><a href="#adding-columns" id="toc-adding-columns" class="nav-link" data-scroll-target="#adding-columns"><span class="header-section-number">4.1</span> Adding columns</a></li>
-  <li><a href="#adding-rows" id="toc-adding-rows" class="nav-link" data-scroll-target="#adding-rows"><span class="header-section-number">4.2</span> Adding rows</a></li>
+<li><a href="#adding-rows" id="toc-adding-rows" class="nav-link" data-scroll-target="#adding-rows">Adding rows</a></li>
+  <li><a href="#adding-columns" id="toc-adding-columns" class="nav-link" data-scroll-target="#adding-columns">Adding columns</a></li>
   </ul>
 </li>
   <li>
-<a href="#relational-data" id="toc-relational-data" class="nav-link" data-scroll-target="#relational-data"><span class="header-section-number">5</span> Relational Data</a>
+<a href="#relational-data" id="toc-relational-data" class="nav-link" data-scroll-target="#relational-data">Relational Data</a>
   <ul>
 <li>
-<a href="#mutating-joins" id="toc-mutating-joins" class="nav-link" data-scroll-target="#mutating-joins"><span class="header-section-number">5.1</span> Mutating joins</a>
+<a href="#mutating-joins" id="toc-mutating-joins" class="nav-link" data-scroll-target="#mutating-joins">Mutating joins</a>
   <ul class="collapse">
-<li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join"><span class="header-section-number">5.1.1</span> Inner join</a></li>
-  <li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join"><span class="header-section-number">5.1.2</span> Left join</a></li>
-  <li><a href="#right-join" id="toc-right-join" class="nav-link" data-scroll-target="#right-join"><span class="header-section-number">5.1.3</span> Right join</a></li>
-  <li><a href="#full-join" id="toc-full-join" class="nav-link" data-scroll-target="#full-join"><span class="header-section-number">5.1.4</span> Full join</a></li>
+<li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join">Inner join</a></li>
   </ul>
 </li>
   <li>
-<a href="#filtering-joins" id="toc-filtering-joins" class="nav-link" data-scroll-target="#filtering-joins"><span class="header-section-number">5.2</span> Filtering joins</a>
+<a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a>
   <ul class="collapse">
-<li><a href="#semi-join" id="toc-semi-join" class="nav-link" data-scroll-target="#semi-join"><span class="header-section-number">5.2.1</span> Semi join</a></li>
-  <li><a href="#anti-join" id="toc-anti-join" class="nav-link" data-scroll-target="#anti-join"><span class="header-section-number">5.2.2</span> Anti join</a></li>
-  </ul>
-</li>
-  <li><a href="#join-problems" id="toc-join-problems" class="nav-link" data-scroll-target="#join-problems"><span class="header-section-number">5.3</span> Join problems</a></li>
-  <li><a href="#set-operations" id="toc-set-operations" class="nav-link" data-scroll-target="#set-operations"><span class="header-section-number">5.4</span> Set operations</a></li>
+<li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join">Left join</a></li>
+  <li><a href="#right-join" id="toc-right-join" class="nav-link" data-scroll-target="#right-join">Right join</a></li>
+  <li><a href="#full-join" id="toc-full-join" class="nav-link" data-scroll-target="#full-join">Full join</a></li>
   </ul>
 </li>
   <li>
-<a href="#make-dyads" id="toc-make-dyads" class="nav-link" data-scroll-target="#make-dyads"><span class="header-section-number">6</span> Make Dyads</a>
-  <ul>
-<li><a href="#directed-dyads" id="toc-directed-dyads" class="nav-link" data-scroll-target="#directed-dyads"><span class="header-section-number">6.1</span> Directed dyads</a></li>
-  <li><a href="#non-directed-dyads" id="toc-non-directed-dyads" class="nav-link" data-scroll-target="#non-directed-dyads"><span class="header-section-number">6.2</span> Non-directed dyads</a></li>
+<a href="#filtering-joins" id="toc-filtering-joins" class="nav-link" data-scroll-target="#filtering-joins">Filtering joins</a>
+  <ul class="collapse">
+<li><a href="#semi-join" id="toc-semi-join" class="nav-link" data-scroll-target="#semi-join">Semi join</a></li>
+  <li><a href="#anti-join" id="toc-anti-join" class="nav-link" data-scroll-target="#anti-join">Anti join</a></li>
+  </ul>
+</li>
+  <li><a href="#join-problems" id="toc-join-problems" class="nav-link" data-scroll-target="#join-problems">Join problems</a></li>
+  <li><a href="#set-operations" id="toc-set-operations" class="nav-link" data-scroll-target="#set-operations">Set operations</a></li>
   </ul>
 </li>
   <li>
-<a href="#complete-combination" id="toc-complete-combination" class="nav-link" data-scroll-target="#complete-combination"><span class="header-section-number">7</span> Complete Combination</a>
+<a href="#make-dyads-using-existing-data" id="toc-make-dyads-using-existing-data" class="nav-link" data-scroll-target="#make-dyads-using-existing-data">Make Dyads using Existing Data</a>
   <ul>
-<li><a href="#complete" id="toc-complete" class="nav-link" data-scroll-target="#complete"><span class="header-section-number">7.1</span> Complete</a></li>
+<li><a href="#directed-dyads" id="toc-directed-dyads" class="nav-link" data-scroll-target="#directed-dyads">Directed dyads</a></li>
+  <li><a href="#non-directed-dyads" id="toc-non-directed-dyads" class="nav-link" data-scroll-target="#non-directed-dyads">Non-directed dyads</a></li>
   </ul>
 </li>
-  <li><a href="#expand" id="toc-expand" class="nav-link" data-scroll-target="#expand"><span class="header-section-number">8</span> Expand</a></li>
-  <li><a href="#expandcomplete-with-group_by" id="toc-expandcomplete-with-group_by" class="nav-link" data-scroll-target="#expandcomplete-with-group_by"><span class="header-section-number">9</span> Expand/Complete with <code>group_by</code></a></li>
-  <li><a href="#expand-with-nesting" id="toc-expand-with-nesting" class="nav-link" data-scroll-target="#expand-with-nesting"><span class="header-section-number">10</span> Expand with nesting</a></li>
-  <li><a href="#crossing" id="toc-crossing" class="nav-link" data-scroll-target="#crossing"><span class="header-section-number">11</span> Crossing</a></li>
+  <li>
+<a href="#complete-combination" id="toc-complete-combination" class="nav-link" data-scroll-target="#complete-combination">Complete Combination</a>
+  <ul>
+<li><a href="#complete" id="toc-complete" class="nav-link" data-scroll-target="#complete">Complete</a></li>
+  </ul>
+</li>
+  <li><a href="#expand" id="toc-expand" class="nav-link" data-scroll-target="#expand">Expand</a></li>
+  <li><a href="#expandcomplete-with-group_by" id="toc-expandcomplete-with-group_by" class="nav-link" data-scroll-target="#expandcomplete-with-group_by">Expand/Complete with <code>group_by</code></a></li>
+  <li><a href="#expand-with-nesting" id="toc-expand-with-nesting" class="nav-link" data-scroll-target="#expand-with-nesting">Expand with nesting</a></li>
+  <li><a href="#crossing" id="toc-crossing" class="nav-link" data-scroll-target="#crossing">Crossing</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></nav>
 </div>
-<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="attention" class="level2" data-number="1"><h2 data-number="1" class="anchored" data-anchor-id="attention">
-<span class="header-section-number">1</span> Attention!</h2>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="attention" class="level2"><h2 class="anchored" data-anchor-id="attention">Attention!</h2>
 <div class="callout callout-style-simple callout-caution no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -188,7 +212,7 @@ background: #EBA900;
 <p>Here, I assume:</p>
 <ol type="1">
 <li>that you already know how to import data into R.</li>
-<li>that you already know how to use <a href="https://tidyverse.tidyverse.org">tidyverse</a> workflow using pipes from <a href="https://magrittr.tidyverse.org">magrittr</a> or native pipes (<code>|&gt;</code>). I will use native pipes.</li>
+<li>that you already know how to use <a href="https://tidyverse.tidyverse.org">tidyverse</a> workflow using pipes (<code>%&gt;%</code>) from <a href="https://magrittr.tidyverse.org">magrittr</a> or native pipes (<code>|&gt;</code>). I will use native pipes.</li>
 </ol>
 <p>The goal of today’s class is to identify:</p>
 <ul>
@@ -198,64 +222,484 @@ background: #EBA900;
 </div>
 </div>
 </div>
-</section><section id="load-packages" class="level2" data-number="2"><h2 data-number="2" class="anchored" data-anchor-id="load-packages">
-<span class="header-section-number">2</span> Load Packages</h2>
+</section><section id="load-packages" class="level2"><h2 class="anchored" data-anchor-id="load-packages">Load Packages</h2>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">vdemdata</span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://xmarquez.github.io/democracyData/">democracyData</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="example-data-in-use" class="level2" data-number="3"><h2 data-number="3" class="anchored" data-anchor-id="example-data-in-use">
-<span class="header-section-number">3</span> Example Data in Use</h2>
-<p>We will use two different example data sets from <code>V-Dem</code> and <code>World Development Indicators</code>. You can download the two example data sets here: example1 and example2.</p>
-</section><section id="incomplete-data-what-does-it-mean" class="level2" data-number="4"><h2 data-number="4" class="anchored" data-anchor-id="incomplete-data-what-does-it-mean">
-<span class="header-section-number">4</span> Incomplete Data, what does it mean?</h2>
-<section id="adding-columns" class="level3" data-number="4.1"><h3 data-number="4.1" class="anchored" data-anchor-id="adding-columns">
-<span class="header-section-number">4.1</span> Adding columns</h3>
-</section><section id="adding-rows" class="level3" data-number="4.2"><h3 data-number="4.2" class="anchored" data-anchor-id="adding-rows">
-<span class="header-section-number">4.2</span> Adding rows</h3>
-</section></section><section id="relational-data" class="level2" data-number="5"><h2 data-number="5" class="anchored" data-anchor-id="relational-data">
-<span class="header-section-number">5</span> Relational Data</h2>
-<section id="mutating-joins" class="level3" data-number="5.1"><h3 data-number="5.1" class="anchored" data-anchor-id="mutating-joins">
-<span class="header-section-number">5.1</span> Mutating joins</h3>
-<section id="inner-join" class="level4" data-number="5.1.1"><h4 data-number="5.1.1" class="anchored" data-anchor-id="inner-join">
-<span class="header-section-number">5.1.1</span> Inner join</h4>
-</section><section id="left-join" class="level4" data-number="5.1.2"><h4 data-number="5.1.2" class="anchored" data-anchor-id="left-join">
-<span class="header-section-number">5.1.2</span> Left join</h4>
-</section><section id="right-join" class="level4" data-number="5.1.3"><h4 data-number="5.1.3" class="anchored" data-anchor-id="right-join">
-<span class="header-section-number">5.1.3</span> Right join</h4>
-</section><section id="full-join" class="level4" data-number="5.1.4"><h4 data-number="5.1.4" class="anchored" data-anchor-id="full-join">
-<span class="header-section-number">5.1.4</span> Full join</h4>
-</section></section><section id="filtering-joins" class="level3" data-number="5.2"><h3 data-number="5.2" class="anchored" data-anchor-id="filtering-joins">
-<span class="header-section-number">5.2</span> Filtering joins</h3>
-<section id="semi-join" class="level4" data-number="5.2.1"><h4 data-number="5.2.1" class="anchored" data-anchor-id="semi-join">
-<span class="header-section-number">5.2.1</span> Semi join</h4>
-</section><section id="anti-join" class="level4" data-number="5.2.2"><h4 data-number="5.2.2" class="anchored" data-anchor-id="anti-join">
-<span class="header-section-number">5.2.2</span> Anti join</h4>
-</section></section><section id="join-problems" class="level3" data-number="5.3"><h3 data-number="5.3" class="anchored" data-anchor-id="join-problems">
-<span class="header-section-number">5.3</span> Join problems</h3>
-</section><section id="set-operations" class="level3" data-number="5.4"><h3 data-number="5.4" class="anchored" data-anchor-id="set-operations">
-<span class="header-section-number">5.4</span> Set operations</h3>
-</section></section><section id="make-dyads" class="level2" data-number="6"><h2 data-number="6" class="anchored" data-anchor-id="make-dyads">
-<span class="header-section-number">6</span> Make Dyads</h2>
-<section id="directed-dyads" class="level3" data-number="6.1"><h3 data-number="6.1" class="anchored" data-anchor-id="directed-dyads">
-<span class="header-section-number">6.1</span> Directed dyads</h3>
-</section><section id="non-directed-dyads" class="level3" data-number="6.2"><h3 data-number="6.2" class="anchored" data-anchor-id="non-directed-dyads">
-<span class="header-section-number">6.2</span> Non-directed dyads</h3>
-</section></section><section id="complete-combination" class="level2" data-number="7"><h2 data-number="7" class="anchored" data-anchor-id="complete-combination">
-<span class="header-section-number">7</span> Complete Combination</h2>
-<section id="complete" class="level3" data-number="7.1"><h3 data-number="7.1" class="anchored" data-anchor-id="complete">
-<span class="header-section-number">7.1</span> Complete</h3>
-</section></section><section id="expand" class="level2" data-number="8"><h2 data-number="8" class="anchored" data-anchor-id="expand">
-<span class="header-section-number">8</span> Expand</h2>
-</section><section id="expandcomplete-with-group_by" class="level2" data-number="9"><h2 data-number="9" class="anchored" data-anchor-id="expandcomplete-with-group_by">
-<span class="header-section-number">9</span> Expand/Complete with <code>group_by</code>
+</section><section id="example-data-in-use" class="level2"><h2 class="anchored" data-anchor-id="example-data-in-use">Example Data in Use</h2>
+<p>We will use two different example data sets from <code>V-Dem</code> and <code>World Development Indicators</code>. The two example data sets are available for download here: <a href="https://github.com/pherephobia/3_NazarbayevDS/blob/90f4c802cd9ad18d1fb33c43332a434dc0d71656/examples/example1.csv">example1</a> and <a href="https://github.com/pherephobia/3_NazarbayevDS/blob/90f4c802cd9ad18d1fb33c43332a434dc0d71656/examples/example2.csv">example2</a>. Because the example data is in csv format, you must use the appropriate function to import the example data sets into R. I put them in a folder called <code>examples</code>. We will also use other data sets that are built into R.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"examples/example1.csv"</span><span class="op">)</span></span>
+<span><span class="va">example2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"examples/example2.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s look at the data set structures:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">example1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3,922
+Columns: 9
+$ country_name    &lt;chr&gt; "Mexico", "Mexico", "Mexico", "Mexico", "Mexico", "Mex…
+$ country_text_id &lt;chr&gt; "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "MEX"…
+$ country_id      &lt;dbl&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
+$ year            &lt;dbl&gt; 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, …
+$ COWcode         &lt;dbl&gt; 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70…
+$ v2x_polyarchy   &lt;dbl&gt; 0.684, 0.694, 0.702, 0.710, 0.710, 0.675, 0.644, 0.643…
+$ e_polity2       &lt;dbl&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, …
+$ e_fh_cl         &lt;dbl&gt; 3, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
+$ e_fh_pr         &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, …</code></pre>
+</div>
+</div>
+<p><code>example1</code> is drawn from the <a href="https://v-dem.net/">V-Dem</a> data set. <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> function is tidyverse version of the base R function, <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>, which shows the structure of a data frame. <code>example1</code> has 3,922 observations (rows) and 9 variables (columns). It has four id variables (<code>country_name</code>, <code>country_text_id</code>, <code>country_id</code>, <code>COWcode</code>), as well as one year variable (<code>year</code>). <code>v2x_polyarchy</code> is the “Electoral Democracy Index (EDI),” which measures procedural democracy based on the suggestions of <span class="citation" data-cites="dahl1971a">Dahl (<a href="#ref-dahl1971a" role="doc-biblioref">1971</a>)</span> . <code>e_polity2</code> is an alternative measure of democracy from POLITY project, while <code>e_fh_cl</code> and <code>e_fh_pr</code> are drawn from the “Freedom House Index,” which represents civil liberties and political rights.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">example2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 4,220
+Columns: 11
+$ ccode                &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4…
+$ cname                &lt;chr&gt; "Afghanistan", "Afghanistan", "Afghanistan", "Afg…
+$ year                 &lt;dbl&gt; 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2…
+$ ccodealp             &lt;chr&gt; "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", "AFG", …
+$ cname_year           &lt;chr&gt; "Afghanistan 2001", "Afghanistan 2002", "Afghanis…
+$ ccodealp_year        &lt;chr&gt; "AFG01", "AFG02", "AFG03", "AFG04", "AFG05", "AFG…
+$ ccodecow             &lt;dbl&gt; 700, 700, 700, 700, 700, 700, 700, 700, 700, 700,…
+$ ccodewb              &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4…
+$ wdi_gdpcappppcon2017 &lt;dbl&gt; NA, 1189.785, 1235.810, 1200.278, 1286.794, 1315.…
+$ wdi_pop1564          &lt;dbl&gt; 48.90547, 49.09875, 49.34294, 49.61243, 49.91287,…
+$ wdi_trade            &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</code></pre>
+</div>
+</div>
+<p><code>example2</code> is from the <a href="https://databank.worldbank.org/source/world-development-indicators">World Development Indicators</a>, World Bank. When we look at the data, we see that there are 4,220 observations (rows) and 11 variables (columns). <code>example2</code> includes five country-id variables (<code>ccode</code>, <code>cname</code>, <code>ccodealp</code>, <code>ccodecow</code>, <code>ccodewb</code>) as well as year-related variables (<code>year</code>, <code>cname_year</code>, <code>ccodealp_year</code>). It also has two additional variables: GDP per capita, PPP (constant 2017 US dollars), which is gross domestic product converted to US dollars using purchasing power parity rates and the trade openness that is the sum of exports and imports of goods and services measured as a share of gross domestic product.</p>
+<p>Because I filtered both example data sets from 2001, <code>example1</code> is between 2001 and 2022 and <code>example2</code> is between 2001 and 2020.</p>
+</section><section id="incomplete-data-what-does-it-mean" class="level2"><h2 class="anchored" data-anchor-id="incomplete-data-what-does-it-mean">Incomplete Data, what does it mean?</h2>
+<p>What does the term “incomplete data” mean? Because survey data is designed to answer specific questions, the information provided by the data is usually sufficient to answer our research questions. Also, as the units are different, it is difficult to merge survey data with other data sets unless we keep tracing and surveying the same respondents.</p>
+<p>When we use non-survey observational data, we may run into an incomplete data problem, which means that a single data set is insufficient to answer our questions. To solve this problem, we must combine multiple incomplete data sets to make them complete.</p>
+<p>The process of combining multiple data sets into a single data set is known as merging. Adding inflation factors to panel data to adjust income to today’s rates is one example, as is adding county-level statistics to individual-level data. We’ll look at two kinds of merges: adding columns from one data set to another and adding rows (also known as appending).</p>
+<section id="adding-rows" class="level3"><h3 class="anchored" data-anchor-id="adding-rows">Adding rows</h3>
+<p>The actual act of merging two data sets usually involves only one or two lines of code. Most of the work when merging happens before this, in preparing data frames for merging and in deciding which rows we want in the output.</p>
+<p>Let’s create two data frames from <code>example1</code>: <code>example1_1</code> and <code>example1_2</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example1_1</span> <span class="op">&lt;-</span> <span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">country_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mexico"</span>, <span class="st">"South Korea"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">example1_2</span> <span class="op">&lt;-</span> <span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">country_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"United States of America"</span>, <span class="st">"South Korea"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To merge two data frames, we need keys, identifiers that we can use to match one set of information to another. A common example of a key in the social sciences is a person ID, which can be used to link information across multiple data sets. However, our <code>example1</code> is not an individual level data. Thus, keys will be <code>country</code> and <code>year</code> identifiers: <code>country_name</code>, <code>country_text_id</code>, <code>country_id</code>, <code>COWcode</code>, <code>year</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">example1_1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["country_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country_text_id"],"name":[2],"type":["chr"],"align":["left"]},{"label":["country_id"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["COWcode"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["v2x_polyarchy"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"Mexico","2":"MEX","3":"3","4":"2001","5":"70","6":"0.684"},{"1":"Mexico","2":"MEX","3":"3","4":"2002","5":"70","6":"0.694"},{"1":"Mexico","2":"MEX","3":"3","4":"2003","5":"70","6":"0.702"},{"1":"Mexico","2":"MEX","3":"3","4":"2004","5":"70","6":"0.710"},{"1":"Mexico","2":"MEX","3":"3","4":"2005","5":"70","6":"0.710"},{"1":"Mexico","2":"MEX","3":"3","4":"2006","5":"70","6":"0.675"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">example1_1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 44
+Columns: 6
+$ country_name    &lt;chr&gt; "Mexico", "Mexico", "Mexico", "Mexico", "Mexico", "Mex…
+$ country_text_id &lt;chr&gt; "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "MEX"…
+$ country_id      &lt;dbl&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
+$ year            &lt;dbl&gt; 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, …
+$ COWcode         &lt;dbl&gt; 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70…
+$ v2x_polyarchy   &lt;dbl&gt; 0.684, 0.694, 0.702, 0.710, 0.710, 0.675, 0.644, 0.643…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">example1_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["country_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country_text_id"],"name":[2],"type":["chr"],"align":["left"]},{"label":["country_id"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["COWcode"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["e_polity2"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["e_fh_cl"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["e_fh_pr"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"United States of America","2":"USA","3":"20","4":"2001","5":"2","6":"10","7":"1","8":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2002","5":"2","6":"10","7":"1","8":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2003","5":"2","6":"10","7":"1","8":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2004","5":"2","6":"10","7":"1","8":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2005","5":"2","6":"10","7":"1","8":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2006","5":"2","6":"10","7":"1","8":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">example1_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 44
+Columns: 8
+$ country_name    &lt;chr&gt; "United States of America", "United States of America"…
+$ country_text_id &lt;chr&gt; "USA", "USA", "USA", "USA", "USA", "USA", "USA", "USA"…
+$ country_id      &lt;dbl&gt; 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20…
+$ year            &lt;dbl&gt; 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, …
+$ COWcode         &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+$ e_polity2       &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10…
+$ e_fh_cl         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ e_fh_pr         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, …</code></pre>
+</div>
+</div>
+<p>What we want to accomplish with our merge is to collect them all into a single data set. The question we have to answer first is, which rows do we want to appear in our merged data set? Currently, both data sets share variables <code>country_name</code>, <code>country_text_id</code>, <code>country_id</code>, <code>COWcode</code>, and <code>year</code>. Beyond that, one has data for Mexico, and the other for the United States of America.</p>
+<p>Now, you know that the two different data sets share the keys and have only one different values for country. When the data sets share the keys, it is easy to combine them into one data frame: use <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">example1_1</span>, <span class="va">example1_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["country_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country_text_id"],"name":[2],"type":["chr"],"align":["left"]},{"label":["country_id"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["COWcode"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["v2x_polyarchy"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["e_polity2"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["e_fh_cl"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["e_fh_pr"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"Mexico","2":"MEX","3":"3","4":"2001","5":"70","6":"0.684","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2002","5":"70","6":"0.694","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2003","5":"70","6":"0.702","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2004","5":"70","6":"0.710","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2005","5":"70","6":"0.710","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2006","5":"70","6":"0.675","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2007","5":"70","6":"0.644","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2008","5":"70","6":"0.643","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2009","5":"70","6":"0.641","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2010","5":"70","6":"0.649","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2011","5":"70","6":"0.647","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2012","5":"70","6":"0.645","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2013","5":"70","6":"0.618","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2014","5":"70","6":"0.618","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2015","5":"70","6":"0.636","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2016","5":"70","6":"0.634","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2017","5":"70","6":"0.626","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2018","5":"70","6":"0.671","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2019","5":"70","6":"0.671","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2020","5":"70","6":"0.652","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2021","5":"70","6":"0.617","7":"NA","8":"NA","9":"NA"},{"1":"Mexico","2":"MEX","3":"3","4":"2022","5":"70","6":"0.598","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2001","5":"732","6":"0.845","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2002","5":"732","6":"0.845","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2003","5":"732","6":"0.848","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2004","5":"732","6":"0.847","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2005","5":"732","6":"0.847","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2006","5":"732","6":"0.847","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2007","5":"732","6":"0.846","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2008","5":"732","6":"0.772","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2009","5":"732","6":"0.769","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2010","5":"732","6":"0.774","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2011","5":"732","6":"0.774","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2012","5":"732","6":"0.762","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2013","5":"732","6":"0.729","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2014","5":"732","6":"0.718","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2015","5":"732","6":"0.720","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2016","5":"732","6":"0.733","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2017","5":"732","6":"0.862","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2018","5":"732","6":"0.866","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2019","5":"732","6":"0.851","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2020","5":"732","6":"0.859","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2021","5":"732","6":"0.863","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2022","5":"732","6":"0.812","7":"NA","8":"NA","9":"NA"},{"1":"United States of America","2":"USA","3":"20","4":"2001","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2002","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2003","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2004","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2005","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2006","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2007","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2008","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2009","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2010","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2011","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2012","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2013","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2014","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2015","5":"2","6":"NA","7":"10","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2016","5":"2","6":"NA","7":"8","8":"1","9":"1"},{"1":"United States of America","2":"USA","3":"20","4":"2017","5":"2","6":"NA","7":"8","8":"1","9":"2"},{"1":"United States of America","2":"USA","3":"20","4":"2018","5":"2","6":"NA","7":"8","8":"1","9":"2"},{"1":"United States of America","2":"USA","3":"20","4":"2019","5":"2","6":"NA","7":"7","8":"1","9":"2"},{"1":"United States of America","2":"USA","3":"20","4":"2020","5":"2","6":"NA","7":"5","8":"2","9":"2"},{"1":"United States of America","2":"USA","3":"20","4":"2021","5":"2","6":"NA","7":"NA","8":"2","9":"2"},{"1":"United States of America","2":"USA","3":"20","4":"2022","5":"2","6":"NA","7":"NA","8":"NA","9":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2001","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2002","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2003","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2004","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2005","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2006","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2007","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2008","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2009","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2010","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2011","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2012","5":"732","6":"NA","7":"8","8":"2","9":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2013","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2014","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2015","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2016","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2017","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2018","5":"732","6":"NA","7":"8","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2019","5":"732","6":"NA","7":"NA","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2020","5":"732","6":"NA","7":"NA","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2021","5":"732","6":"NA","7":"NA","8":"2","9":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2022","5":"732","6":"NA","7":"NA","8":"NA","9":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">example1_1</span>, <span class="va">example1_2</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 88
+Columns: 9
+$ country_name    &lt;chr&gt; "Mexico", "Mexico", "Mexico", "Mexico", "Mexico", "Mex…
+$ country_text_id &lt;chr&gt; "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "MEX"…
+$ country_id      &lt;dbl&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
+$ year            &lt;dbl&gt; 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, …
+$ COWcode         &lt;dbl&gt; 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70…
+$ v2x_polyarchy   &lt;dbl&gt; 0.684, 0.694, 0.702, 0.710, 0.710, 0.675, 0.644, 0.643…
+$ e_polity2       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ e_fh_cl         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ e_fh_pr         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</code></pre>
+</div>
+</div>
+<p>When you supply a column name with the <code>.id</code> argument, a new # column is created to link each row to its original data frame <code>bind_rows(list(example1_1, example1_2), .id = "id")</code></p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">example1_1</span>, <span class="va">example1_2</span><span class="op">)</span>, .id <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["country_text_id"],"name":[3],"type":["chr"],"align":["left"]},{"label":["country_id"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["COWcode"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["v2x_polyarchy"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["e_polity2"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["e_fh_cl"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["e_fh_pr"],"name":[10],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2001","6":"70","7":"0.684","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2002","6":"70","7":"0.694","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2003","6":"70","7":"0.702","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2004","6":"70","7":"0.710","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2005","6":"70","7":"0.710","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2006","6":"70","7":"0.675","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2007","6":"70","7":"0.644","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2008","6":"70","7":"0.643","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2009","6":"70","7":"0.641","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2010","6":"70","7":"0.649","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2011","6":"70","7":"0.647","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2012","6":"70","7":"0.645","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2013","6":"70","7":"0.618","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2014","6":"70","7":"0.618","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2015","6":"70","7":"0.636","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2016","6":"70","7":"0.634","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2017","6":"70","7":"0.626","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2018","6":"70","7":"0.671","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2019","6":"70","7":"0.671","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2020","6":"70","7":"0.652","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2021","6":"70","7":"0.617","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"Mexico","3":"MEX","4":"3","5":"2022","6":"70","7":"0.598","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2001","6":"732","7":"0.845","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2002","6":"732","7":"0.845","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2003","6":"732","7":"0.848","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2004","6":"732","7":"0.847","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2005","6":"732","7":"0.847","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2006","6":"732","7":"0.847","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2007","6":"732","7":"0.846","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2008","6":"732","7":"0.772","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2009","6":"732","7":"0.769","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2010","6":"732","7":"0.774","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2011","6":"732","7":"0.774","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2012","6":"732","7":"0.762","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2013","6":"732","7":"0.729","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2014","6":"732","7":"0.718","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2015","6":"732","7":"0.720","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2016","6":"732","7":"0.733","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2017","6":"732","7":"0.862","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2018","6":"732","7":"0.866","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2019","6":"732","7":"0.851","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2020","6":"732","7":"0.859","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2021","6":"732","7":"0.863","8":"NA","9":"NA","10":"NA"},{"1":"1","2":"South Korea","3":"KOR","4":"42","5":"2022","6":"732","7":"0.812","8":"NA","9":"NA","10":"NA"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2001","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2002","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2003","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2004","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2005","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2006","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2007","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2008","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2009","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2010","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2011","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2012","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2013","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2014","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2015","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2016","6":"2","7":"NA","8":"8","9":"1","10":"1"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2017","6":"2","7":"NA","8":"8","9":"1","10":"2"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2018","6":"2","7":"NA","8":"8","9":"1","10":"2"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2019","6":"2","7":"NA","8":"7","9":"1","10":"2"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2020","6":"2","7":"NA","8":"5","9":"2","10":"2"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2021","6":"2","7":"NA","8":"NA","9":"2","10":"2"},{"1":"2","2":"United States of America","3":"USA","4":"20","5":"2022","6":"2","7":"NA","8":"NA","9":"NA","10":"NA"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2001","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2002","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2003","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2004","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2005","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2006","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2007","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2008","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2009","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2010","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2011","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2012","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2013","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2014","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2015","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2016","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2017","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2018","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2019","6":"732","7":"NA","8":"NA","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2020","6":"732","7":"NA","8":"NA","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2021","6":"732","7":"NA","8":"NA","9":"2","10":"2"},{"1":"2","2":"South Korea","3":"KOR","4":"42","5":"2022","6":"732","7":"NA","8":"NA","9":"NA","10":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="st">"group 1"</span> <span class="op">=</span> <span class="va">example1_1</span>, <span class="st">"group 2"</span> <span class="op">=</span> <span class="va">example1_2</span>, .id <span class="op">=</span> <span class="st">"groups"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["groups"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["country_text_id"],"name":[3],"type":["chr"],"align":["left"]},{"label":["country_id"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["COWcode"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["v2x_polyarchy"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["e_polity2"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["e_fh_cl"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["e_fh_pr"],"name":[10],"type":["dbl"],"align":["right"]}],"data":[{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2001","6":"70","7":"0.684","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2002","6":"70","7":"0.694","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2003","6":"70","7":"0.702","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2004","6":"70","7":"0.710","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2005","6":"70","7":"0.710","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2006","6":"70","7":"0.675","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2007","6":"70","7":"0.644","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2008","6":"70","7":"0.643","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2009","6":"70","7":"0.641","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2010","6":"70","7":"0.649","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2011","6":"70","7":"0.647","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2012","6":"70","7":"0.645","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2013","6":"70","7":"0.618","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2014","6":"70","7":"0.618","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2015","6":"70","7":"0.636","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2016","6":"70","7":"0.634","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2017","6":"70","7":"0.626","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2018","6":"70","7":"0.671","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2019","6":"70","7":"0.671","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2020","6":"70","7":"0.652","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2021","6":"70","7":"0.617","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"Mexico","3":"MEX","4":"3","5":"2022","6":"70","7":"0.598","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2001","6":"732","7":"0.845","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2002","6":"732","7":"0.845","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2003","6":"732","7":"0.848","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2004","6":"732","7":"0.847","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2005","6":"732","7":"0.847","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2006","6":"732","7":"0.847","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2007","6":"732","7":"0.846","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2008","6":"732","7":"0.772","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2009","6":"732","7":"0.769","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2010","6":"732","7":"0.774","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2011","6":"732","7":"0.774","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2012","6":"732","7":"0.762","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2013","6":"732","7":"0.729","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2014","6":"732","7":"0.718","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2015","6":"732","7":"0.720","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2016","6":"732","7":"0.733","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2017","6":"732","7":"0.862","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2018","6":"732","7":"0.866","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2019","6":"732","7":"0.851","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2020","6":"732","7":"0.859","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2021","6":"732","7":"0.863","8":"NA","9":"NA","10":"NA"},{"1":"group 1","2":"South Korea","3":"KOR","4":"42","5":"2022","6":"732","7":"0.812","8":"NA","9":"NA","10":"NA"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2001","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2002","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2003","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2004","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2005","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2006","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2007","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2008","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2009","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2010","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2011","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2012","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2013","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2014","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2015","6":"2","7":"NA","8":"10","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2016","6":"2","7":"NA","8":"8","9":"1","10":"1"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2017","6":"2","7":"NA","8":"8","9":"1","10":"2"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2018","6":"2","7":"NA","8":"8","9":"1","10":"2"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2019","6":"2","7":"NA","8":"7","9":"1","10":"2"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2020","6":"2","7":"NA","8":"5","9":"2","10":"2"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2021","6":"2","7":"NA","8":"NA","9":"2","10":"2"},{"1":"group 2","2":"United States of America","3":"USA","4":"20","5":"2022","6":"2","7":"NA","8":"NA","9":"NA","10":"NA"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2001","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2002","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2003","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2004","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2005","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2006","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2007","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2008","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2009","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2010","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2011","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2012","6":"732","7":"NA","8":"8","9":"2","10":"1"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2013","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2014","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2015","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2016","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2017","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2018","6":"732","7":"NA","8":"8","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2019","6":"732","7":"NA","8":"NA","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2020","6":"732","7":"NA","8":"NA","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2021","6":"732","7":"NA","8":"NA","9":"2","10":"2"},{"1":"group 2","2":"South Korea","3":"KOR","4":"42","5":"2022","6":"732","7":"NA","8":"NA","9":"NA","10":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Columns don’t need to match when row-binding.</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"NA"},{"1":"2","2":"NA"},{"1":"3","2":"NA"},{"1":"NA","2":"1"},{"1":"NA","2":"2"},{"1":"NA","2":"3"},{"1":"NA","2":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Row sizes must be compatible when column-binding, otherwise you will see error messages.</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Error in bind_cols(tibble(x = 1:3), tibble(y = 1:2)) : 
+  Can't recycle `..1` (size 3) to match `..2` (size 2).</code></pre>
+</div>
+</div>
+<p>Also, <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> is picky about matching column types, and it will not automatically coerce columns to be of the same type. Instead, it will return an error. We can fix this by manually coercing column types to character before merging.</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey1</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>             Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>             Q2a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sometimes"</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>             Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>             Q3a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Never"</span>, <span class="st">"Always"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">survey1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2
+Columns: 5
+$ Q1  &lt;dbl&gt; 1, 1
+$ Q2  &lt;dbl&gt; 3, 1
+$ Q2a &lt;chr&gt; "Sometimes", NA
+$ Q3  &lt;dbl&gt; 6, 7
+$ Q3a &lt;chr&gt; "Never", "Always"</code></pre>
+</div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey2</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Q1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>             Q2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>             Q2a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>             Q3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>,</span>
+<span>             Q3a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">survey2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 3
+Columns: 5
+$ Q1  &lt;dbl&gt; 2, 4, 4
+$ Q2  &lt;dbl&gt; 1, 5, 3
+$ Q2a &lt;dbl&gt; NA, NA, 2
+$ Q3  &lt;dbl&gt; 4, 2, 5
+$ Q3a &lt;lgl&gt; NA, NA, NA</code></pre>
+</div>
+</div>
+<p>When we use <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> for <code>survey1</code> and <code>survey2</code>, the error message tells us that column <code>Q2a</code> is character in one data frame and numeric in the other.</p>
+<div class="cell">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">survey1</span>, <span class="va">survey2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `bind_rows()`:
+! Can't combine `..1$Q2a` &lt;character&gt; and `..2$Q2a` &lt;double&gt;.</code></pre>
+</div>
+</div>
+<p>This happened here because <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> automatically assigned a type based on the values it observed. When we read in datasets, <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> and related functions will also use the values to determine the type. Differences in responses between two datasets, especially for open-response questions, can lead to different types assigned to the two datasets’ columns.</p>
+<p>To fix this, simply coerce the problem column in one dataset to match the type of that column in the other dataset. Then, use <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey2b</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">survey2</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Q2a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">Q2a</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">surveys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">survey1</span>, <span class="va">survey2b</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">surveys</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Q1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Q2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Q2a"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Q3"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Q3a"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"3","3":"Sometimes","4":"6","5":"Never"},{"1":"1","2":"1","3":"NA","4":"7","5":"Always"},{"1":"2","2":"1","3":"NA","4":"4","5":"NA"},{"1":"4","2":"5","3":"NA","4":"2","5":"NA"},{"1":"4","2":"3","3":"2","4":"5","5":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> changes the number of rows (observations) of the combined data set.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+When is <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> useful?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> can be useful if you have multiple data sources and want to combine them into one. Suppose you download multiple data sets for a country but from different years from the same website. If they have the same keys, you can use <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> to combine them and create a new variable, <code>year</code> with the <code>.id</code> option in <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>.</p>
+</div>
+</div>
+</section><section id="adding-columns" class="level3"><h3 class="anchored" data-anchor-id="adding-columns">Adding columns</h3>
+<p>While <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> is about the number of observations, <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> is about the number of variables. When you have a set of shared keys and two different data sets with different variables, you can combine them into one.</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">example1_1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "country_name"    "country_text_id" "country_id"      "year"           
+[5] "COWcode"         "v2x_polyarchy"  </code></pre>
+</div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">example1_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "country_name"    "country_text_id" "country_id"      "year"           
+[5] "COWcode"         "e_polity2"       "e_fh_cl"         "e_fh_pr"        </code></pre>
+</div>
+</div>
+<p><code>example1_1</code> contains the variable, <code>v2x_polyarchy</code> whereas <code>example1_2</code> has <code>e_polity2</code>, <code>e_fh_cl</code>, <code>e_fh_pr</code>. As you may be aware, the two separated data sets share country and year identifiers. Thus, you want to create a combined data set with country and year identifiers with <code>v2x_polyarchy</code>, <code>e_polity2</code>, <code>e_fh_cl</code>, <code>e_fh_pr</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">example1_1</span>, <span class="va">example1_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["country_name...1"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country_text_id...2"],"name":[2],"type":["chr"],"align":["left"]},{"label":["country_id...3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["year...4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["COWcode...5"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["v2x_polyarchy"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["country_name...7"],"name":[7],"type":["chr"],"align":["left"]},{"label":["country_text_id...8"],"name":[8],"type":["chr"],"align":["left"]},{"label":["country_id...9"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["year...10"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["COWcode...11"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["e_polity2"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["e_fh_cl"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["e_fh_pr"],"name":[14],"type":["dbl"],"align":["right"]}],"data":[{"1":"Mexico","2":"MEX","3":"3","4":"2001","5":"70","6":"0.684","7":"United States of America","8":"USA","9":"20","10":"2001","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2002","5":"70","6":"0.694","7":"United States of America","8":"USA","9":"20","10":"2002","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2003","5":"70","6":"0.702","7":"United States of America","8":"USA","9":"20","10":"2003","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2004","5":"70","6":"0.710","7":"United States of America","8":"USA","9":"20","10":"2004","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2005","5":"70","6":"0.710","7":"United States of America","8":"USA","9":"20","10":"2005","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2006","5":"70","6":"0.675","7":"United States of America","8":"USA","9":"20","10":"2006","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2007","5":"70","6":"0.644","7":"United States of America","8":"USA","9":"20","10":"2007","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2008","5":"70","6":"0.643","7":"United States of America","8":"USA","9":"20","10":"2008","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2009","5":"70","6":"0.641","7":"United States of America","8":"USA","9":"20","10":"2009","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2010","5":"70","6":"0.649","7":"United States of America","8":"USA","9":"20","10":"2010","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2011","5":"70","6":"0.647","7":"United States of America","8":"USA","9":"20","10":"2011","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2012","5":"70","6":"0.645","7":"United States of America","8":"USA","9":"20","10":"2012","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2013","5":"70","6":"0.618","7":"United States of America","8":"USA","9":"20","10":"2013","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2014","5":"70","6":"0.618","7":"United States of America","8":"USA","9":"20","10":"2014","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2015","5":"70","6":"0.636","7":"United States of America","8":"USA","9":"20","10":"2015","11":"2","12":"10","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2016","5":"70","6":"0.634","7":"United States of America","8":"USA","9":"20","10":"2016","11":"2","12":"8","13":"1","14":"1"},{"1":"Mexico","2":"MEX","3":"3","4":"2017","5":"70","6":"0.626","7":"United States of America","8":"USA","9":"20","10":"2017","11":"2","12":"8","13":"1","14":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2018","5":"70","6":"0.671","7":"United States of America","8":"USA","9":"20","10":"2018","11":"2","12":"8","13":"1","14":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2019","5":"70","6":"0.671","7":"United States of America","8":"USA","9":"20","10":"2019","11":"2","12":"7","13":"1","14":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2020","5":"70","6":"0.652","7":"United States of America","8":"USA","9":"20","10":"2020","11":"2","12":"5","13":"2","14":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2021","5":"70","6":"0.617","7":"United States of America","8":"USA","9":"20","10":"2021","11":"2","12":"NA","13":"2","14":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2022","5":"70","6":"0.598","7":"United States of America","8":"USA","9":"20","10":"2022","11":"2","12":"NA","13":"NA","14":"NA"},{"1":"South Korea","2":"KOR","3":"42","4":"2001","5":"732","6":"0.845","7":"South Korea","8":"KOR","9":"42","10":"2001","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2002","5":"732","6":"0.845","7":"South Korea","8":"KOR","9":"42","10":"2002","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2003","5":"732","6":"0.848","7":"South Korea","8":"KOR","9":"42","10":"2003","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2004","5":"732","6":"0.847","7":"South Korea","8":"KOR","9":"42","10":"2004","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2005","5":"732","6":"0.847","7":"South Korea","8":"KOR","9":"42","10":"2005","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2006","5":"732","6":"0.847","7":"South Korea","8":"KOR","9":"42","10":"2006","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2007","5":"732","6":"0.846","7":"South Korea","8":"KOR","9":"42","10":"2007","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2008","5":"732","6":"0.772","7":"South Korea","8":"KOR","9":"42","10":"2008","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2009","5":"732","6":"0.769","7":"South Korea","8":"KOR","9":"42","10":"2009","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2010","5":"732","6":"0.774","7":"South Korea","8":"KOR","9":"42","10":"2010","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2011","5":"732","6":"0.774","7":"South Korea","8":"KOR","9":"42","10":"2011","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2012","5":"732","6":"0.762","7":"South Korea","8":"KOR","9":"42","10":"2012","11":"732","12":"8","13":"2","14":"1"},{"1":"South Korea","2":"KOR","3":"42","4":"2013","5":"732","6":"0.729","7":"South Korea","8":"KOR","9":"42","10":"2013","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2014","5":"732","6":"0.718","7":"South Korea","8":"KOR","9":"42","10":"2014","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2015","5":"732","6":"0.720","7":"South Korea","8":"KOR","9":"42","10":"2015","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2016","5":"732","6":"0.733","7":"South Korea","8":"KOR","9":"42","10":"2016","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2017","5":"732","6":"0.862","7":"South Korea","8":"KOR","9":"42","10":"2017","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2018","5":"732","6":"0.866","7":"South Korea","8":"KOR","9":"42","10":"2018","11":"732","12":"8","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2019","5":"732","6":"0.851","7":"South Korea","8":"KOR","9":"42","10":"2019","11":"732","12":"NA","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2020","5":"732","6":"0.859","7":"South Korea","8":"KOR","9":"42","10":"2020","11":"732","12":"NA","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2021","5":"732","6":"0.863","7":"South Korea","8":"KOR","9":"42","10":"2021","11":"732","12":"NA","13":"2","14":"2"},{"1":"South Korea","2":"KOR","3":"42","4":"2022","5":"732","6":"0.812","7":"South Korea","8":"KOR","9":"42","10":"2022","11":"732","12":"NA","13":"NA","14":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>However, it seems something weird since it has two times of variables more than the original data sets. What happens? <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> function binds any number of data frames by column, making a wider result. However, it requires that row sizes must be compatible when column-binding. Therefore, where possible prefer using a <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">join</a> to combine multiple data frames. <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> binds the rows in order in which they appear so it is easy to create meaningless results without realising it. We will see the <code>*_join()</code> functions in the next section.</p>
+<div class="cell">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">example1_1</span>, <span class="va">example1_2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 44
+Columns: 14
+$ country_name...1    &lt;chr&gt; "Mexico", "Mexico", "Mexico", "Mexico", "Mexico", …
+$ country_text_id...2 &lt;chr&gt; "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "MEX", "…
+$ country_id...3      &lt;dbl&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,…
+$ year...4            &lt;dbl&gt; 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 20…
+$ COWcode...5         &lt;dbl&gt; 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70…
+$ v2x_polyarchy       &lt;dbl&gt; 0.684, 0.694, 0.702, 0.710, 0.710, 0.675, 0.644, 0…
+$ country_name...7    &lt;chr&gt; "United States of America", "United States of Amer…
+$ country_text_id...8 &lt;chr&gt; "USA", "USA", "USA", "USA", "USA", "USA", "USA", "…
+$ country_id...9      &lt;dbl&gt; 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20…
+$ year...10           &lt;dbl&gt; 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 20…
+$ COWcode...11        &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
+$ e_polity2           &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10…
+$ e_fh_cl             &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ e_fh_pr             &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,…</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+When is <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> useful?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> can be useful when you combine two different data frames, which you already know what they are:</p>
+<div class="cell">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load diamonds data set</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">diamonds</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Fit a simple regression model</span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">price</span> <span class="op">~</span> <span class="va">carat</span>, data <span class="op">=</span> <span class="va">diamonds</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Make the fitted results as data frame</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"broom"</span><span class="op">)</span></span>
+<span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"-2256.361","3":"13.05535","4":"-172.8304","5":"0"},{"1":"carat","2":"7756.426","3":"14.06658","4":"551.4081","5":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># {broom} package provides the function, tidy(), which returns the fitted</span></span>
+<span><span class="co"># results as a tidy data frame.</span></span>
+<span><span class="co"># However, it does not provide you confidence intervals.</span></span>
+<span><span class="co"># You can get confidence intervals using the function confint_tidy().</span></span>
+<span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://broom.tidymodels.org/reference/confint_tidy.html">confint_tidy</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["conf.low"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"-2281.949","2":"-2230.772"},{"1":"7728.855","2":"7783.996"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Now you know that the two data frames can be combined:</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span></span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span>,</span>
+<span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://broom.tidymodels.org/reference/confint_tidy.html">confint_tidy</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["term"],"name":[1],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"-2256.361","3":"13.05535","4":"-172.8304","5":"0","6":"-2281.949","7":"-2230.772"},{"1":"carat","2":"7756.426","3":"14.06658","4":"551.4081","5":"0","6":"7728.855","7":"7783.996"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section><section id="relational-data" class="level2"><h2 class="anchored" data-anchor-id="relational-data">Relational Data</h2>
+<blockquote class="blockquote">
+<p>This subsection is borrowed from <code>Joins</code> section of <span class="citation" data-cites="wickham2023">Wickham, Çetinkaya-Rundel, and Grolemund (<a href="#ref-wickham2023" role="doc-biblioref">2023</a>)</span> (Hereafter, <a href="https://r4ds.hadley.nz/">R4DS</a>). Also, see <span class="citation" data-cites="17mergi">Social Science Computing Cooperative (<a href="#ref-17mergi" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="peng">Peng (<a href="#ref-peng" role="doc-biblioref">2020</a>)</span> .</p>
+</blockquote>
+<p>It’s rare that a data analysis involves only a single table of data. Typically you have many tables of data, and you must combine them to answer the questions that you’re interested in. Collectively, multiple tables of data are called <strong>relational data</strong> because it is the relations, not just the individual data sets, that are important.</p>
+<p>Relations are always defined between a pair of tables. All other relations are built up from this simple idea: the relations of three or more tables are always a property of the relations between each pair. Sometimes both elements of a pair can be the same table! This is needed if, for example, you have a table of people, and each person has a reference to their parents.</p>
+<p>To work with relational data you need verbs that work with pairs of tables. There are three families of verbs designed to work with relational data:</p>
+<ul>
+<li><p><strong>Mutating joins</strong>, which add new variables to one data frame from matching observations in another.</p></li>
+<li><p><strong>Filtering joins</strong>, which filter observations from one data frame based on whether or not they match an observation in the other table.</p></li>
+<li><p><strong>Set operations</strong>, which treat observations as if they were set elements.</p></li>
+</ul>
+<p>The <code>dplyr</code> package provides a set of functions for joining two data frames into a single data frame based on a set of key columns. There are several functions in the <code>*_join</code> family. These functions all merge together two data frames; they differ in how they handle observations that exist in one but not both data frames. Here are the four functions from this family that you will likely use the most often:</p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 79%">
+</colgroup>
+<thead><tr class="header">
+<th><strong>Function</strong></th>
+<th><strong>What it includes in merged data frame</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>left_join</code></td>
+<td>Includes all observations in the left data frame, whether or not there is a match in the right data frame</td>
+</tr>
+<tr class="even">
+<td><code>right_join</code></td>
+<td>Includes all observations in the right data frame, whether or not there is a match in the left data frame</td>
+</tr>
+<tr class="odd">
+<td><code>inner_join</code></td>
+<td>Includes only observations that are in both data frames</td>
+</tr>
+<tr class="even">
+<td><code>full_join</code></td>
+<td>Includes all observations from both data frames</td>
+</tr>
+</tbody>
+</table>
+<p>A common task in data analysis is to bring different data sets together, so that we can combine columns from two (or more) tables together.</p>
+<p>This can be achieved using the <em>join</em> family of functions in <code>dplyr</code>. There are different types of <em>joins</em>, which can be represented by a series of Venn diagrams:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/07-dplyr_joins.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<section id="mutating-joins" class="level3"><h3 class="anchored" data-anchor-id="mutating-joins">Mutating joins</h3>
+<div class="cell">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">example1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">example2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["country_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country_text_id"],"name":[2],"type":["chr"],"align":["left"]},{"label":["country_id"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["COWcode"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["v2x_polyarchy"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["e_polity2"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["e_fh_cl"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["e_fh_pr"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"Mexico","2":"MEX","3":"3","4":"2001","5":"70","6":"0.684","7":"8","8":"3","9":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2002","5":"70","6":"0.694","7":"8","8":"2","9":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2003","5":"70","6":"0.702","7":"8","8":"2","9":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2004","5":"70","6":"0.710","7":"8","8":"2","9":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2005","5":"70","6":"0.710","7":"8","8":"2","9":"2"},{"1":"Mexico","2":"MEX","3":"3","4":"2006","5":"70","6":"0.675","7":"8","8":"3","9":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["ccode"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cname"],"name":[2],"type":["chr"],"align":["left"]},{"label":["year"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["ccodealp"],"name":[4],"type":["chr"],"align":["left"]},{"label":["cname_year"],"name":[5],"type":["chr"],"align":["left"]},{"label":["ccodealp_year"],"name":[6],"type":["chr"],"align":["left"]},{"label":["ccodecow"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["ccodewb"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["wdi_gdpcappppcon2017"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["wdi_pop1564"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["wdi_trade"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"4","2":"Afghanistan","3":"2001","4":"AFG","5":"Afghanistan 2001","6":"AFG01","7":"700","8":"4","9":"NA","10":"48.90547","11":"NA"},{"1":"4","2":"Afghanistan","3":"2002","4":"AFG","5":"Afghanistan 2002","6":"AFG02","7":"700","8":"4","9":"1189.785","10":"49.09875","11":"NA"},{"1":"4","2":"Afghanistan","3":"2003","4":"AFG","5":"Afghanistan 2003","6":"AFG03","7":"700","8":"4","9":"1235.810","10":"49.34294","11":"NA"},{"1":"4","2":"Afghanistan","3":"2004","4":"AFG","5":"Afghanistan 2004","6":"AFG04","7":"700","8":"4","9":"1200.278","10":"49.61243","11":"NA"},{"1":"4","2":"Afghanistan","3":"2005","4":"AFG","5":"Afghanistan 2005","6":"AFG05","7":"700","8":"4","9":"1286.794","10":"49.91287","11":"NA"},{"1":"4","2":"Afghanistan","3":"2006","4":"AFG","5":"Afghanistan 2006","6":"AFG06","7":"700","8":"4","9":"1315.790","10":"49.75844","11":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The <code>by</code> option is used to tell the <em>join</em> function which column(s) are used to “match” the rows of the two tables.</p>
+<section id="inner-join" class="level4"><h4 class="anchored" data-anchor-id="inner-join">Inner join</h4>
+<p><img src="images/inner_join.png" class="img-fluid"></p>
+</section></section><section id="section" class="level3"><h3 class="anchored" data-anchor-id="section"></h3>
+<p>We can see that the output has fewer rows than both of these tables, which makes sense given we’re only keeping the “intersection” between the two.</p>
+<section id="left-join" class="level4"><h4 class="anchored" data-anchor-id="left-join">Left join</h4>
+<p><img src="images/left_join.png" class="img-fluid"></p>
+<p>Now suppose we want to create a table that combines the information about different democracy measurements with country-year units. We can use the <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code> function to merge the <code>example1</code> and <code>example2</code> tables.</p>
+<p>First, when you use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>, you have to determine which data frame should be a baseline.</p>
+</section><section id="right-join" class="level4"><h4 class="anchored" data-anchor-id="right-join">Right join</h4>
+<p><img src="images/right_join.png" class="img-fluid"></p>
+</section><section id="full-join" class="level4"><h4 class="anchored" data-anchor-id="full-join">Full join</h4>
+<p><img src="images/full_join.png" class="img-fluid"></p>
+</section></section><section id="filtering-joins" class="level3"><h3 class="anchored" data-anchor-id="filtering-joins">Filtering joins</h3>
+<section id="semi-join" class="level4"><h4 class="anchored" data-anchor-id="semi-join">Semi join</h4>
+</section><section id="anti-join" class="level4"><h4 class="anchored" data-anchor-id="anti-join">Anti join</h4>
+</section></section><section id="join-problems" class="level3"><h3 class="anchored" data-anchor-id="join-problems">Join problems</h3>
+</section><section id="set-operations" class="level3"><h3 class="anchored" data-anchor-id="set-operations">Set operations</h3>
+</section></section><section id="make-dyads-using-existing-data" class="level2"><h2 class="anchored" data-anchor-id="make-dyads-using-existing-data">Make Dyads using Existing Data</h2>
+<section id="directed-dyads" class="level3"><h3 class="anchored" data-anchor-id="directed-dyads">Directed dyads</h3>
+</section><section id="non-directed-dyads" class="level3"><h3 class="anchored" data-anchor-id="non-directed-dyads">Non-directed dyads</h3>
+</section></section><section id="complete-combination" class="level2"><h2 class="anchored" data-anchor-id="complete-combination">Complete Combination</h2>
+<section id="complete" class="level3"><h3 class="anchored" data-anchor-id="complete">Complete</h3>
+</section></section><section id="expand" class="level2"><h2 class="anchored" data-anchor-id="expand">Expand</h2>
+</section><section id="expandcomplete-with-group_by" class="level2"><h2 class="anchored" data-anchor-id="expandcomplete-with-group_by">Expand/Complete with <code>group_by</code>
 </h2>
-</section><section id="expand-with-nesting" class="level2" data-number="10"><h2 data-number="10" class="anchored" data-anchor-id="expand-with-nesting">
-<span class="header-section-number">10</span> Expand with nesting</h2>
-</section><section id="crossing" class="level2" data-number="11"><h2 data-number="11" class="anchored" data-anchor-id="crossing">
-<span class="header-section-number">11</span> Crossing</h2>
-</section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+</section><section id="expand-with-nesting" class="level2"><h2 class="anchored" data-anchor-id="expand-with-nesting">Expand with nesting</h2>
+</section><section id="crossing" class="level2"><h2 class="anchored" data-anchor-id="crossing">Crossing</h2>
+</section><section id="references" class="level2 unnumbered">
+
+</section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-dahl1971a" class="csl-entry" role="listitem">
+Dahl, Robert A. 1971. <em>Polyarchy: Participation and Opposition</em>. New Haven, CT: Yale University Press.
+</div>
+<div id="ref-peng" class="csl-entry" role="listitem">
+Peng, Roger D. 2020. <em>9 LECTURE: Joining Data in <span>R</span>: Basics | Statistical Computing (Biostatistics 140.776)</em>. <a href="https://rdpeng.github.io/Biostat776/lecture-joining-data-in-r-basics.html">https://rdpeng.github.io/Biostat776/lecture-joining-data-in-r-basics.html</a>.
+</div>
+<div id="ref-17mergi" class="csl-entry" role="listitem">
+Social Science Computing Cooperative. 2023. <em>17 Merging | Data Wrangling with <span>R</span></em>. <a href="https://sscc.wisc.edu/sscc/pubs/dwr/merge-tidy.html">https://sscc.wisc.edu/sscc/pubs/dwr/merge-tidy.html</a>.
+</div>
+<div id="ref-wickham2023" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 2nd ed. Oreilly &amp; Associates Inc. <a href="https://r4ds.hadley.nz/joins.html">https://r4ds.hadley.nz/joins.html</a>.
+</div>
+</div></section></div></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
