@@ -429,7 +429,11 @@ example1 |> drop_na(COWcode, year) |>
 
 #### Semi join
 
+![](images/clipboard-3999725691.png)
+
 #### Anti join
+
+![](images/clipboard-112439528.png)
 
 ### Join problems
 

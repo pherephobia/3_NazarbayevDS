@@ -429,7 +429,11 @@ example1 |> drop_na(COWcode, year) |>
 
 #### Semi join
 
+![](images/clipboard-3999725691.png)
+
 #### Anti join
+
+![](images/clipboard-112439528.png)
 
 ### Join problems
 
@@ -439,7 +443,31 @@ example1 |> drop_na(COWcode, year) |>
 
 ### Directed dyads
 
+```{r}
+dyadic_df <- example1 |> drop_na(COWcode, year) |> 
+  full_join(example1 |> drop_na(COWcode, year), by = "year", suffix = c("_1", "_2")) |> 
+  dplyr::filter(COWcode_1 != COWcode_2)   # Removing same country pairs
+  # dplyr::filter(!duplicated(
+  #   tibble(min = pmin(COWcode_1, COWcode_2), 
+  #          max = pmax(COWcode_1, COWcode_2), year)))  # Removing reverse duplicates
+
+```
+
 ### Non-directed dyads
+
+```{r}
+nd_dyadic_df <- example1 |> drop_na(COWcode, year) |> 
+  full_join(example1 |> drop_na(COWcode, year), by = "year", suffix = c("_1", "_2")) |> 
+  dplyr::filter(COWcode_1 != COWcode_2) |>    # Removing same country pairs
+  dplyr::filter(!duplicated(
+    tibble(min = pmin(COWcode_1, COWcode_2),
+           max = pmax(COWcode_1, COWcode_2), year)))  # Removing reverse duplicates
+
+nd_dyadic_df2 <- example1 |> drop_na(COWcode, year) |> 
+  full_join(example1 |> drop_na(COWcode, year), by = "year", suffix = c("_1", "_2")) |> 
+  dplyr::filter(COWcode_1 != COWcode_2) |>    # Removing same country pairs
+  dplyr::filter(COWcode_1 < COWcode_2)  # Removing reverse duplicates
+```
 
 ## Complete Combination
 
