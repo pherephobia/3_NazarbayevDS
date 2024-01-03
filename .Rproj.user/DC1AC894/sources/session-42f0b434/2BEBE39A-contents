@@ -73,8 +73,9 @@ showtext_auto(TRUE)
 theme_set(theme_minimal(base_family = "Montserrat") + 
     tomtom::theme_538() +
     theme(
-      axis.title = element_text(family = "Montserrat"),
-      axis.text = element_text(family = "Montserrat"),
+      strip.text = element_text(size = 20),
+      axis.title = element_text(family = "Montserrat", size = 18, lineheight = 0.5),
+      axis.text = element_text(family = "Montserrat", size = 15, lineheight = 0.5),
       panel.grid.major.y = element_blank(),
       panel.grid.minor = element_blank(),
       plot.background = element_rect(fill = "white", color = "white")
@@ -91,8 +92,10 @@ library(tidyverse)
 We will use two different example data sets from `V-Dem` and `World Development Indicators`. The two example data sets are available for download here: [example1](https://github.com/pherephobia/3_NazarbayevDS/blob/90f4c802cd9ad18d1fb33c43332a434dc0d71656/examples/example1.csv) and [example2](https://github.com/pherephobia/3_NazarbayevDS/blob/90f4c802cd9ad18d1fb33c43332a434dc0d71656/examples/example2.csv). Because the example data is in csv format, you must use the appropriate function to import the example data sets into R. I put them in a folder called `examples`. We will also use other data sets that are built into R.
 
 ```{r}
-example1 <- read_csv("examples/example1.csv")
-example2 <- read_csv("examples/example2.csv")
+example1 <- read_csv("examples/example1.csv") |> 
+  dplyr::select(COWcode, country_name, year, v2x_polyarchy, contains("e_"))
+example2 <- read_csv("examples/example2.csv") |> 
+  dplyr::select(ccodecow, year, contains("wdi_"))
 ```
 
 Let's look at the data set structures:
@@ -108,7 +111,7 @@ glimpse(example2)
 
 ```
 
-`example2` is from the [World Development Indicators](https://databank.worldbank.org/source/world-development-indicators), World Bank. When we look at the data, we see that there are 4,220 observations (rows) and 11 variables (columns). `example2` includes five country-id variables (`ccode`, `cname`, `ccodealp`, `ccodecow`, `ccodewb`) as well as year-related variables (`year`, `cname_year`, `ccodealp_year`). It also has two additional variables: GDP per capita, PPP (constant 2017 US dollars), which is gross domestic product converted to US dollars using purchasing power parity rates and the trade openness that is the sum of exports and imports of goods and services measured as a share of gross domestic product.
+`example2` is from the [World Development Indicators](https://databank.worldbank.org/source/world-development-indicators), World Bank. When we look at the data, we see that there are 4,220 observations (rows) and 11 variables (columns). `example2` includes five country-id variables (`ccodecow`) as well as year-related variables (`year`). It also has two additional variables: GDP per capita, PPP (constant 2017 US dollars), which is gross domestic product converted to US dollars using purchasing power parity rates and the trade openness that is the sum of exports and imports of goods and services measured as a share of gross domestic product.
 
 Because I filtered both example data sets from 2001, `example1` is between 2001 and 2022 and `example2` is between 2001 and 2020.
 
@@ -127,13 +130,13 @@ The actual act of merging two data sets usually involves only one or two lines o
 Let’s create two data frames from `example1`: `example1_1` and `example1_2`.
 
 ```{r}
-example1_1 <- example1 |> dplyr::select(1:6) |> 
+example1_1 <- example1 |> 
   dplyr::filter(country_name %in% c("Mexico", "South Korea"))
-example1_2 <- example1 |> dplyr::select(1:5, 7:9) |> 
+example1_2 <- example1 |> 
   dplyr::filter(country_name %in% c("United States of America", "South Korea"))
 ```
 
-To merge two data frames, we need keys, identifiers that we can use to match one set of information to another. A common example of a key in the social sciences is a person ID, which can be used to link information across multiple data sets. However, our `example1` is not an individual level data. Thus, keys will be `country` and `year` identifiers: `country_name`, `country_text_id`, `country_id`, `COWcode`, `year`.
+To merge two data frames, we need keys, identifiers that we can use to match one set of information to another. A common example of a key in the social sciences is a person ID, which can be used to link information across multiple data sets. However, our `example1` is not an individual level data. Thus, keys will be `country` and `year` identifiers: `country_name`, `COWcode`, `year`.
 
 ```{r}
 head(example1_1)
@@ -151,7 +154,7 @@ head(example1_2)
 glimpse(example1_2)
 ```
 
-What we want to accomplish with our merge is to collect them all into a single data set. The question we have to answer first is, which rows do we want to appear in our merged data set? Currently, both data sets share variables `country_name`, `country_text_id`, `country_id`, `COWcode`, and `year`. Beyond that, one has data for Mexico, and the other for the United States of America.
+What we want to accomplish with our merge is to collect them all into a single data set. The question we have to answer first is, which rows do we want to appear in our merged data set? Currently, both data sets share variables `country_name`, `COWcode`, and `year`. Beyond that, one has data for Mexico, and the other for the United States of America.
 
 Now, you know that the two different data sets share the keys and have only one different values for country. When the data sets share the keys, it is easy to combine them into one data frame: use `bind_rows()`.
 
@@ -290,7 +293,9 @@ bind_cols(
 
 > This subsection is borrowed from `Joins` section of @wickham2023 (Hereafter, [R4DS](https://r4ds.hadley.nz/)). Also, see @17mergi and @peng .
 
-It’s rare that a data analysis involves only a single table of data. Typically you have many tables of data, and you must combine them to answer the questions that you’re interested in. Collectively, multiple tables of data are called **relational data** because it is the relations, not just the individual data sets, that are important.
+It’s rare that a data analysis involves only a single table of data. Typically you have many tables of data, and you must combine them to answer the questions that you’re interested in. Collectively, multiple tables of data are called **relational data** because it is the relations, not just the individual data sets, that are important.[^1]
+
+[^1]: Non-relational data has no tables, rows, primary keys or foreign keys. Instead, it uses a storage model optimized for specific requirements of the type of data being stored. You can see a `json` format data [here](https://opensource.adobe.com/Spry/samples/data_region/JSONDataSetSample.html).
 
 Relations are always defined between a pair of tables. All other relations are built up from this simple idea: the relations of three or more tables are always a property of the relations between each pair. Sometimes both elements of a pair can be the same table! This is needed if, for example, you have a table of people, and each person has a reference to their parents.
 
@@ -325,13 +330,46 @@ head(example1); head(example2)
 
 The `by` option is used to tell the *join* function which column(s) are used to “match” the rows of the two tables.
 
+#### First step: Find keys to join
+
 #### Inner join
 
 ![](images/inner_join.png)
 
-### 
-
 We can see that the output has fewer rows than both of these tables, which makes sense given we’re only keeping the “intersection” between the two.
+
+```{r}
+# the `all()` function checks whether all values of a logical vector are TRUE
+all(example1$COWcode %in% example2$ccodecow)
+```
+
+And the same happens for year:
+
+```{r}
+all(example1$year %in% example2$year)
+```
+
+So, different types of *join* operations (represented in the figure above) will result in different outcomes. Let’s start by doing an *inner join*, which retains only the entries common to both tables:
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  inner_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year"))
+```
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  inner_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year")) |> glimpse()
+```
+
+```{r}
+# You can find that the number of rows of the inner joined data frame is 
+# smaller than example1 and example2
+glimpse(example1); glimpse(example2)
+```
+
+I used `drop_na()` for the keys as the `*_join()` functions treat `NA`s as string (text) when they join the data. Thus, unless you do not manage the potential `NA`s, you will get multiple country code `NA` - year `NA` combinations for the final outcomes.
 
 #### Left join
 
@@ -339,15 +377,53 @@ We can see that the output has fewer rows than both of these tables, which makes
 
 Now suppose we want to create a table that combines the information about different democracy measurements with country-year units. We can use the `left_join()` function to merge the `example1` and `example2` tables.
 
-First, when you use `left_join()`, you have to determine which data frame should be a baseline.
+First, when you use `left_join()`, you have to determine which data frame should be a baseline. If I want to use the dependent variable from `example1`, `example1` should be the baseline:
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  left_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year"))
+```
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  left_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year")) |> glimpse()
+```
 
 #### Right join
 
 ![](images/right_join.png)
 
+`right_join()` works perfectly same with the `left_join()`, but the setting of baseline is different:
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  right_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year"))
+```
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  right_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year")) |> glimpse()
+```
+
 #### Full join
 
 ![](images/full_join.png)
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  full_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year"))
+```
+
+```{r}
+example1 |> drop_na(COWcode, year) |> 
+  full_join(example2 |> drop_na(ccodecow, year),
+             by = c("COWcode" = "ccodecow", "year")) |> glimpse()
+```
 
 ### Filtering joins
 
@@ -367,14 +443,282 @@ First, when you use `left_join()`, you have to determine which data frame should
 
 ## Complete Combination
 
-### Complete
+I’ve always found it difficult to distinguish the functions `complete`, `expand`, `nesting`, and `crossing` from another. In a sense, they do similar things. They find combinations of values in vectors or columns. I originally thought of writing a separate tutorial for each function, but digesting them all at once makes it easier to tell the difference between them. Let’s take some time to look into these functions. And let’s start with an overview of what they do:
 
-## Expand
+```{r}
+#| echo: false
 
-## Expand/Complete with `group_by`
+table_comb <- 
+  tibble(Fuction = c("`complete`", "`expand`", "`expand` with `nesting`", "`crossing`"),
+         Explanation = c(
+           "Turn implicit missing values into explicit values. The function completes combinations of values from columns that exist in a data frame and/or from vectors. complete is a shortcut version of `expand`.",
+           "Creates a new tibble with all possible combinations of values from a data frame. The function is often used with joins.",
+           "Create a new tibble with the unique combinations of column values that exist in a data frame.",
+           "Create a tibble with all combinations of values from vectors."))
 
-## Expand with nesting
+knitr::kable(table_comb)
+```
 
-## Crossing
+`expand`, in contrast, creates a new tibble. The tibble represents either all possible combinations of values or the unique combinations of values (with nesting). Suppose you have an incomplete tibble with months and years, in which the combination of the month “February” and the year 2013 is missing. You can use `expand` to create a complete set of years and months, including the combination of February and 2013. `crossing` works similarly to `expand`, except that it uses *vectors* to create combinations of values in a data frame. However, as we will see later, `expand` can also do this.
+
+For this tutorial, we will use a made-up data set of running events. Suppose the following data frame shows the running races a runner has completed since 2010. The minutes show the time it took this person to complete the races. Let’s call her Anna.
+
+```{r}
+running_races_anna <- tribble(
+  ~year, ~race, ~minutes,
+  2010, "half marathon", 110,
+  2011, "marathon", 230,
+  2013, "half marathon", 105,
+  2016, "10km", 50,
+  2018, "10km", 45,
+  2018, "half marathon", 100,
+  2022, "marathon", 210
+)
+```
+
+You can see that some years are missing. Anna didn’t run a race in 2012. Also, she did not run a half marathon in 2016. In the next chapters, we will try to complete this data frame with the four functions. Let’s start with `complete`.
+
+### `Complete`
+
+Let’s assume Anna has only run 10Ks, half marathons, and marathons in recent years. Let’s further assume that she could have participated in every race each year. How many running races could she have participated in then?
+
+A first approach could be to convert the implicit combinations into explicit combinations using `complete`. This essentially means nothing more than creating new rows representing the runs in which it did not participate. For these runs, complete sets the values of the `minutes` column to `NA`:
+
+```{r}
+running_races_anna |> 
+  complete(year, race)
+```
+
+Looking at the number of rows she could have participated in 18 competitions. But could she? You might see that we are missing some years. There is no data from 2012 or 2014. This is because `complete` only works with the values that are already in the data. Since she never participated in a race in 2012, we don’t see these races.
+
+However, we can add these values if we use vectors instead of columns. Suppose we want to ensure that the data frame includes all years between 2010 and 2022 and all three running events that are already present in the data:
+
+```{r}
+running_races_anna |> 
+  complete(year = 2010:2022, race)
+```
+
+All combinations of values that were already present in the data did not change. However, the code added rows that were not present. In other words, it added rows with years and races that were not present in the original data frame.
+
+We could even go so far as to include new races to the data frame (i.e. ultra marathons):
+
+```{r}
+running_races_anna |> 
+  complete(year = 2010:2022, race = c(race, "ultra marathons"))
+```
+
+Look how we created a vector that includes the races already present in the data plus ultra marathons.
+
+### `Expand`
+
+The `expand` function does something very similar. However, instead of adding new rows with the complete set of values, a new data frame is created only for the columns you specify in the function (compared to `complete`, where we kept the minutes column).
+
+First, let’s create a simple example. Let’s create a complete combination of years and races from the existing data frame:
+
+```{r}
+running_races_anna |> 
+  tidyr::expand(year, race)
+```
+
+The result is a new data frame. You can see that the column `minutes` is missing. Similar to `complete` we can specify a vector instead of a column, for example to make sure that the data frame covers all years from 2010 to 2022:
+
+```{r}
+running_races_anna |> 
+  tidyr::expand(year = 2010:2022, race)
+```
+
+A neat trick to complete the years is the `full_seq` function:
+
+```{r}
+running_races_anna |> 
+  tidyr::expand(year = full_seq(year, 1), race)
+```
+
+In this case `full_seq` generated the complete set of years, starting with the lowest year in the data frame and ending with the highest year. The 1 indicates that the years should be incremented by 1 each time.
+
+So we have a handle on all the combinations of years and races in our data frame. But we are missing the actual data, namely the minutes Anna took for these races. To add this data to the data frame, we combine `expand` with `full_join`:
+
+```{r}
+(all_running_races_anna <- running_races_anna |> 
+    tidyr::expand(year = full_seq(year, 1), race) |> 
+    full_join(running_races_anna, by = c("year", "race")))
+```
+
+This data frame includes all 39 races that Anna could have participated in between 2010 and 2022.
+
+You may wonder why you should use `expand` instead of `complete` at all? The result is the same we got with `complete`. And the code it is more complicated.
+
+If you take a look at the document, you will see that `complete` is actually a wrapper around `expand`. In other words, it is `expand` combined with `full_join` (see the [official code on GitHub](https://github.com/tidyverse/tidyr/blob/main/R/complete.R)). Essentially, it is a shortcut for the more complicated code we just used. We will show this in the upcoming examples.
+
+### `Expand`/`Complete` with `group_by`
+
+Now let’s imagine Anna is running in a club with three other runners. Eva, John and Leonie.
+
+```{r}
+running_races_club <- tribble(
+  ~year, ~runner, ~race, ~minutes,
+  2012, "Eva", "half marathon", 109,
+  2013, "Eva", "marathon", 260,
+  2022, "Eva", "half marathon", 120,
+  2018, "John", "10km", 51,
+  2019, "John", "10km", 49,
+  2020, "John", "10km", 50,
+  2019, "Leonie", "half marathon", 45,
+  2020, "Leonie", "10km", 45,
+  2021, "Leonie", "half marathon", 102,
+  2022, "Leonie", "marathon", 220
+)
+```
+
+Again, you want to find all races that each runner could have participated in since joining the club. If we used the same `expand` technique we just did, we will run into problems:
+
+```{r}
+(all_running_races_club <- running_races_club |> 
+    tidyr::expand(year = full_seq(year, 1), race, runner))
+```
+
+Take John, for example:
+
+```{r}
+all_running_races_club |> 
+  dplyr::filter(runner %in% "John")
+```
+
+He joined the club in 2019. However, the data frame shows missed races from 2012. This is because the data frame contains the races of Eva, who joined in 2012.
+
+We can fix this problem by grouping the data frame by runners.
+
+```{r}
+(all_running_races_club_correct <- running_races_club |> 
+    group_by(runner) |> 
+    tidyr::expand(year = full_seq(year, 1), 
+           race = c("10km", "half marathon", "marathon")) |> 
+    ungroup())
+```
+
+With group_by we expand the rows only within the runners. If you now take a look at the data, you will notice that John has no races before 2018, which is exactly what we want.
+
+```{r}
+all_running_races_club_correct |> 
+  dplyr::filter(runner %in% "John")
+```
+
+Yet, we still need the actual data of the three runners. We use `left_join` to add the running times to the expanded data frame:
+
+```{r}
+(complete_running_races_club <- all_running_races_club_correct |> 
+    left_join(running_races_club, by = c("year", "runner", "race")))
+```
+
+Since we already know that `complete` is a shortcut for such an analysis, we can use it instead:
+
+```{r}
+running_races_club |> 
+  group_by(runner) |> 
+  complete(year = full_seq(year, 1), 
+           race = c("10km", "half marathon", "marathon")) |> 
+  ungroup()
+```
+
+With this data we can do some interesting analysis. We could visualize the percentage of competitions in which each runner actually participated.
+
+First, we need to find out how many races each runner has completed. To do this, we count the number of races that a runner has or has not completed:
+
+```{r}
+(count_races <- complete_running_races_club |> 
+    count(runner, race, missed_races = is.na(minutes)))
+```
+
+We see that Eva has not completed a single 10-km run in the years she has been a member of the club, because there is a row missing where the `missed_races` column is set to `FALSE`.
+
+Fortunately, we have learned that we can complete an existing data frame with `complete`. Let’s do that:
+
+```{r}
+count_races |> 
+  complete(runner, race, missed_races, fill = list(n = 0))
+```
+
+The code has an interesting addition, the `fill` parameter. The parameter allows us turn `NA`s to actual values. Since we know that the missing rows represent the number of races that were or were not finish, we can be sure that they represent zero races. For Eva, for example, a row is missing for the 10km races in which she never participated.
+
+Now that we have the complete count data of races per runner, we can calculate the percentage of races they participated in. To calculate the percentages, we must first put the data into a wide format and then create a column that represents the percentages:
+
+```{r}
+count_races |> 
+  complete(runner, race, missed_races, fill = list(n = 0)) |> 
+  pivot_wider(names_from = missed_races, values_from = n) |> 
+  mutate(
+    percent_races = (`FALSE` / (`TRUE` + `FALSE`)) * 100)
+```
+
+Let’s talk about Eva again. She participated in 0% of the 10k races and in 18.18% of the possible half marathons. Since she ran only 1 of 11 marathons, she participated in 9% of the marathons.
+
+This is how it looks for all runners:
+
+```{r}
+count_races |> 
+  complete(runner, race, missed_races, fill = list(n = 0)) |> 
+  pivot_wider(names_from = missed_races, values_from = n) |> 
+  mutate(
+    percent_races = (`FALSE` / (`TRUE` + `FALSE`)) * 100) |> 
+  ggplot(aes(x = race, y = percent_races)) +
+  scale_y_continuous(labels = scales::label_percent(scale = 1)) +
+  scale_x_discrete(labels = function(x) str_wrap(x, width = 10)) +
+  geom_col() +
+  facet_wrap(vars(runner))
+```
+
+### `Expand` with `nesting`
+
+So far, we have completed data frames for missing rows. Sometimes, however, we are interested in the unique combinations of values in a data frame. Suppose your running club has 540 members. You want to know in which competitions a runner has participated during her or his time in the club. This is basically the opposite of what we just did. Instead of finding all combinations of values we are looking for the unique combinations; in a given data frame! To find these combinations we can combine expand with nesting:
+
+```{r}
+running_races_club |> 
+  tidyr::expand(nesting(runner, race))
+```
+
+Once again, you can see that Eva has never run a 10K. John has never run a half marathon or marathon. But we have to infer that information from the data frame. The data shows what happened, not what didn’t happen. To find out which runs the runners have never participated in, we can combine the code with `anti_join`:
+
+```{r}
+full_combinations_runners <- 
+  tidyr::expand(running_races_club, runner, 
+                race = c("10km", "half marathon","marathon"))
+
+full_combinations_runners |> 
+  anti_join(running_races_club, by = c("runner", "race"))
+```
+
+The result of our analysis is now easier to process, as we no longer have to search for the known unknowns and get the desired results directly.
+
+### `Crossing`
+
+Let’s talk about tennis. Suppose you want to create a data frame that shows all Grand Slams (Australian Open, French Open, Wimbledon, US Open) from 1905 to 2022. You don’t have an existing data frame at hand, so you need to create one from scratch.
+
+For these cases you need crossing. The difference from the other functions is that crossing does not need an existing data frame. We use vectors instead:
+
+```{r}
+crossing(
+  year = 1905:2022,
+  major = c("Australien Open", "French Open", "Wimbledon", "US Open")
+)
+```
+
+This gives us a total of 472 Grand Slams. Similarly, we could create a data frame representing the [World Marathon Majors](https://en.wikipedia.org/wiki/World_Marathon_Majors), which started in 2006:
+
+```{r}
+crossing(
+  year = 2006:2022,
+  races = c("Tokyo", "Boston", "Chicago",
+            "London", "Berlin", "New York")
+  )
+```
+
+The data itself only gives us a complete set of combinations, by itself it is not very meaningful. `crossing` is usually a starting point for further analyses. Imagine if we had a data set with all the world records set at these majors. We could join the world records to this data frame to determine the percentage of races in which a world record was set at the six majors.
+
+## How to Use `complete`, `expand`, `crossing` for Our Research?
+
+Show an example using COW data and V-Dem.
+
+1.  How can we make a complete combination of COW country-year sets?
+2.  Can we make a dyads using the functions with COW data or V-Dem?
 
 ## References {.unnumbered}
