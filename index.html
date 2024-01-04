@@ -160,10 +160,10 @@ background: #EBA900;
 <li>
 <a href="#mutating-joins" id="toc-mutating-joins" class="nav-link" data-scroll-target="#mutating-joins">Mutating joins</a>
   <ul class="collapse">
-<li><a href="#first-step-find-keys-to-join" id="toc-first-step-find-keys-to-join" class="nav-link" data-scroll-target="#first-step-find-keys-to-join">First step: Find keys to join</a></li>
-  <li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join">Inner join</a></li>
+<li><a href="#inner-join" id="toc-inner-join" class="nav-link" data-scroll-target="#inner-join">Inner join</a></li>
   <li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join">Left join</a></li>
   <li><a href="#right-join" id="toc-right-join" class="nav-link" data-scroll-target="#right-join">Right join</a></li>
+  <li><a href="#left-join-vs.-right-join" id="toc-left-join-vs.-right-join" class="nav-link" data-scroll-target="#left-join-vs.-right-join">Left join vs.&nbsp;Right join</a></li>
   <li><a href="#full-join" id="toc-full-join" class="nav-link" data-scroll-target="#full-join">Full join</a></li>
   </ul>
 </li>
@@ -174,14 +174,12 @@ background: #EBA900;
   <li><a href="#anti-join" id="toc-anti-join" class="nav-link" data-scroll-target="#anti-join">Anti join</a></li>
   </ul>
 </li>
-  <li><a href="#join-problems" id="toc-join-problems" class="nav-link" data-scroll-target="#join-problems">Join problems</a></li>
-  <li><a href="#set-operations" id="toc-set-operations" class="nav-link" data-scroll-target="#set-operations">Set operations</a></li>
   </ul>
 </li>
   <li>
 <a href="#make-dyads-using-existing-data" id="toc-make-dyads-using-existing-data" class="nav-link" data-scroll-target="#make-dyads-using-existing-data">Make Dyads using Existing Data</a>
   <ul>
-<li><a href="#directed-dyads" id="toc-directed-dyads" class="nav-link" data-scroll-target="#directed-dyads">Directed dyads</a></li>
+<li><a href="#directed-dyads-year" id="toc-directed-dyads-year" class="nav-link" data-scroll-target="#directed-dyads-year">Directed dyads-year</a></li>
   <li><a href="#non-directed-dyads" id="toc-non-directed-dyads" class="nav-link" data-scroll-target="#non-directed-dyads">Non-directed dyads</a></li>
   </ul>
 </li>
@@ -195,7 +193,12 @@ background: #EBA900;
   <li><a href="#crossing" id="toc-crossing" class="nav-link" data-scroll-target="#crossing"><code>Crossing</code></a></li>
   </ul>
 </li>
-  <li><a href="#how-to-use-complete-expand-crossing-for-our-research" id="toc-how-to-use-complete-expand-crossing-for-our-research" class="nav-link" data-scroll-target="#how-to-use-complete-expand-crossing-for-our-research">How to Use <code>complete</code>, <code>expand</code>, <code>crossing</code> for Our Research?</a></li>
+  <li>
+<a href="#how-to-use-complete-expand-crossing-for-our-research" id="toc-how-to-use-complete-expand-crossing-for-our-research" class="nav-link" data-scroll-target="#how-to-use-complete-expand-crossing-for-our-research">How to Use <code>complete</code>, <code>expand</code>, <code>crossing</code> for Our Research?</a>
+  <ul>
+<li><a href="#complete-set-of-dyads-year-using-country-code" id="toc-complete-set-of-dyads-year-using-country-code" class="nav-link" data-scroll-target="#complete-set-of-dyads-year-using-country-code">Complete set of dyads-year using country code</a></li>
+  </ul>
+</li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></nav>
 </div>
@@ -221,8 +224,10 @@ background: #EBA900;
 </div>
 </section><section id="load-packages" class="level2"><h2 class="anchored" data-anchor-id="load-packages">Load Packages</h2>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"broom"</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/countrycode/">countrycode</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"countrycode"</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/countrycode/">countrycode</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="example-data-in-use" class="level2"><h2 class="anchored" data-anchor-id="example-data-in-use">Example Data in Use</h2>
 <p>We will use two different example data sets from <code>V-Dem</code> and <code>World Development Indicators</code>. The two example data sets are available for download here: <a href="https://github.com/pherephobia/3_NazarbayevDS/blob/90f4c802cd9ad18d1fb33c43332a434dc0d71656/examples/example1.csv">example1</a> and <a href="https://github.com/pherephobia/3_NazarbayevDS/blob/90f4c802cd9ad18d1fb33c43332a434dc0d71656/examples/example2.csv">example2</a>. Because the example data is in csv format, you must use the appropriate function to import the example data sets into R. I put them in a folder called <code>examples</code>. We will also use other data sets that are built into R.</p>
@@ -439,8 +444,8 @@ $ Q3a &lt;lgl&gt; NA, NA, NA</code></pre>
 ! Can't combine `..1$Q2a` &lt;character&gt; and `..2$Q2a` &lt;double&gt;.</code></pre>
 </div>
 </div>
-<p>This happened here because <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> automatically assigned a type based on the values it observed. When we read in datasets, <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> and related functions will also use the values to determine the type. Differences in responses between two datasets, especially for open-response questions, can lead to different types assigned to the two datasets’ columns.</p>
-<p>To fix this, simply coerce the problem column in one dataset to match the type of that column in the other dataset. Then, use <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>.</p>
+<p>This happened here because <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> automatically assigned a type based on the values it observed. When we read in data sets, <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> and related functions will also use the values to determine the type. Differences in responses between two data sets, especially for open-response questions, can lead to different types assigned to the two data sets’ columns.</p>
+<p>To fix this, simply coerce the problem column in one data set to match the type of that column in the other data set. Then, use <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey2b</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">survey2</span> <span class="op">|&gt;</span></span>
@@ -646,9 +651,15 @@ When is <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bin
 </div>
 </div>
 <p>The <code>by</code> option is used to tell the <em>join</em> function which column(s) are used to “match” the rows of the two tables.</p>
-<section id="first-step-find-keys-to-join" class="level4"><h4 class="anchored" data-anchor-id="first-step-find-keys-to-join">First step: Find keys to join</h4>
-</section><section id="inner-join" class="level4"><h4 class="anchored" data-anchor-id="inner-join">Inner join</h4>
+<p>The function <code>*_join()</code> is used as a standalone command to create the a new <code>joined_data</code> data frame. The inputs are data frames 1 and 2 (<code>example1</code> and <code>example2</code>). If you use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>, the first data frame listed is the baseline data frame, and the second one listed is joined <em>to</em> it. If you use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">right_join()</a></code>, the baseline would be the second one.</p>
+<p>The third argument <code>by =</code> is where you specify the columns in each data frame that will be used to aligns the rows in the two data frames. If the names of these columns are different, provide them within a <a href="https://rdrr.io/r/base/c.html"><code>c()</code></a> vector, where the rows are matched on the basis of common values between the keys that <code>example1</code> and <code>example2</code> share.</p>
+<p>If you are joining the data frames based on common values across multiple fields, list these fields within the <a href="https://rdrr.io/r/base/c.html"><code>c()</code></a> vector.</p>
+<section id="inner-join" class="level4"><h4 class="anchored" data-anchor-id="inner-join">Inner join</h4>
+<p><strong>An inner join is the most&nbsp;<em>restrictive</em>&nbsp;of the joins</strong>&nbsp;- it returns only rows with matches across both data frames.<br>
+This means that the number of rows in the baseline data frame may actually&nbsp;<em>reduce</em>. Adjustment of which data frame is the “baseline” (written first in the function) will not impact which rows are returned, but it will impact the column order, row order, and which identifier columns are retained.</p>
 <p><img src="images/inner_join.png" class="img-fluid"></p>
+<p>Animated example of an inner join (<a href="https://github.com/gadenbuie/tidyexplain/tree/master/images">image source</a>)</p>
+<p><img src="images/inner-join.gif" class="img-fluid"></p>
 <p>We can see that the output has fewer rows than both of these tables, which makes sense given we’re only keeping the “intersection” between the two.</p>
 <div class="cell">
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># the `all()` function checks whether all values of a logical vector are TRUE</span></span>
@@ -794,8 +805,17 @@ $ wdi_pop1564          &lt;dbl&gt; 61.10149, 61.50048, 61.86297, 62.20537, 62.53
 $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93813,…</code></pre>
 </div>
 </div>
+</section><section id="left-join-vs.-right-join" class="level4"><h4 class="anchored" data-anchor-id="left-join-vs.-right-join">Left join vs.&nbsp;Right join</h4>
+<p>Animated examples of left and right joins (<a href="https://github.com/gadenbuie/tidyexplain/tree/master/images">image source</a>)</p>
+<p><img src="images/left-join.gif" class="img-fluid"></p>
+<p><img src="images/right-join.gif" class="img-fluid"></p>
 </section><section id="full-join" class="level4"><h4 class="anchored" data-anchor-id="full-join">Full join</h4>
+<p><strong>A full join is the most <em>inclusive</em> of the joins</strong> - it returns all rows from both data frames.</p>
+<p>If there are any rows present in one and not the other (where no match was found), the data frame will include them and become longer. <code>NA</code> missing values are used to fill-in any gaps created. As you join, watch the number of columns and rows carefully to troubleshoot case-sensitivity and exact character matches.</p>
+<p>The “baseline” data frame is the one written first in the command. Adjustment of this will not impact which records are returned by the join, but it can impact the resulting column order, row order, and which identifier columns are retained.</p>
 <p><img src="images/full_join.png" class="img-fluid"></p>
+<p>Animated example of a full join (<a href="https://github.com/gadenbuie/tidyexplain/tree/master/images">image source</a>)</p>
+<p><img src="images/full-join.gif" class="img-fluid"></p>
 <div class="cell">
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">COWcode</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">example2</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">ccodecow</span>, <span class="va">year</span><span class="op">)</span>,</span>
@@ -830,12 +850,45 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 </section></section><section id="filtering-joins" class="level3"><h3 class="anchored" data-anchor-id="filtering-joins">Filtering joins</h3>
 <section id="semi-join" class="level4"><h4 class="anchored" data-anchor-id="semi-join">Semi join</h4>
+<p>A semi join is a “filtering join” which uses another data set <em>not to add rows or columns, but to perform filtering</em>.</p>
+<p>A <strong>semi-join keeps all observations in the baseline data frame that have a match in the secondary data frame</strong> (but does not add new columns nor duplicate any rows for multiple matches).</p>
+<p><img src="images/clipboard-3999725691.png" class="img-fluid"></p>
+<p>Animated example of a semi join (<a href="https://github.com/gadenbuie/tidyexplain/tree/master/images">image source</a>)</p>
+<p><img src="images/semi-join.gif" class="img-fluid"></p>
 </section><section id="anti-join" class="level4"><h4 class="anchored" data-anchor-id="anti-join">Anti join</h4>
-</section></section><section id="join-problems" class="level3"><h3 class="anchored" data-anchor-id="join-problems">Join problems</h3>
-</section><section id="set-operations" class="level3"><h3 class="anchored" data-anchor-id="set-operations">Set operations</h3>
-</section></section><section id="make-dyads-using-existing-data" class="level2"><h2 class="anchored" data-anchor-id="make-dyads-using-existing-data">Make Dyads using Existing Data</h2>
-<section id="directed-dyads" class="level3"><h3 class="anchored" data-anchor-id="directed-dyads">Directed dyads</h3>
+<p><strong>The anti join is another “filtering join” that returns rows in the baseline data frame that&nbsp;<em>do not</em>&nbsp;have a match in the secondary data frame.</strong></p>
+<p>Common scenarios for an anti-join include identifying records not present in another data frame, troubleshooting spelling in a join (reviewing records that <em>should have</em> matched), and examining records that were excluded after another join.</p>
+<p><strong>As with <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html"><code>right_join()</code></a> and <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html"><code>left_join()</code></a>, the <em>baseline</em> data frame (listed first) is important</strong>. The returned rows are from the baseline data frame only. Notice in the gif below that row in the secondary data frame (purple row 4) is not returned even though it does not match with the baseline.</p>
+<p><img src="images/clipboard-112439528.png" class="img-fluid"></p>
+<p>Animated example of an anti join (<a href="https://github.com/gadenbuie/tidyexplain/tree/master/images">image source</a>)</p>
+<p><img src="images/anti-join.gif" class="img-fluid"></p>
+</section></section></section><section id="make-dyads-using-existing-data" class="level2"><h2 class="anchored" data-anchor-id="make-dyads-using-existing-data">Make Dyads using Existing Data</h2>
+<p>See details in Steven Miller’s post: <a href="https://svmiller.com/blog/2019/01/create-country-year-dyad-year-from-country-data/">here</a>. Following explanations on directed dyads-year and non-directed dyads-year come from his post.</p>
+<section id="directed-dyads-year" class="level3"><h3 class="anchored" data-anchor-id="directed-dyads-year">Directed dyads-year</h3>
+<p>Directed dyad-year data are useful when the researcher is interested in, say, conflict onsets in a given dyad-year and it is important who initiates the dispute. In this interpretation, “France-Germany, 1911” and “Germany-France, 1911” are importantly different observations because Germany initiated the Agadir Crisis (MID#0315) against France and that distinction matters. There is likely an application of directed dyad-year panel frames for IPE researchers interested in, say, directional trade flows.</p>
+<p>Here, I used the directed dyads-year data using <code>example1</code> and <code>example2</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dyadic_df</span> <span class="op">&lt;-</span> <span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">COWcode</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">COWcode</span>, <span class="va">year</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"year"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_1"</span>, <span class="st">"_2"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">COWcode_1</span> <span class="op">!=</span> <span class="va">COWcode_2</span><span class="op">)</span>   <span class="co"># Removing same country pairs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section><section id="non-directed-dyads" class="level3"><h3 class="anchored" data-anchor-id="non-directed-dyads">Non-directed dyads</h3>
+<p>Non-directed dyad-year data are (I think) the most common form of dyad-year analyses of inter-state conflict. In other words, the distinction between who initiated a MID versus who was targeted in a MID is irrelevant. It does not matter that Germany initiated a MID against France in 1911 in Agadir. It only matters that there was one, especially between those two countries at that point in time.</p>
+<p>In practice, creating non-directed dyad-year data means <code>ccode1</code> is whichever state has the lower <code>ccode</code> in the dyad. That means the United States (<code>ccode == 2</code>) will always be first in any non-directed dyad in which it is a party and Samoa (<code>ccode == 990</code>) will never be first in any non-directed dyad in which it is a member.</p>
+<p>Once you understand that distinction, creating a non-directed dyad-year data frame from the directed dyad-year data frame is simple.</p>
+<div class="cell">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nd_dyadic_df</span> <span class="op">&lt;-</span> <span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">COWcode</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">COWcode</span>, <span class="va">year</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"year"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_1"</span>, <span class="st">"_2"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">COWcode_1</span> <span class="op">!=</span> <span class="va">COWcode_2</span><span class="op">)</span> <span class="op">|&gt;</span>    <span class="co"># Removing same country pairs</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmin</a></span><span class="op">(</span><span class="va">COWcode_1</span>, <span class="va">COWcode_2</span><span class="op">)</span>,</span>
+<span>           max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">COWcode_1</span>, <span class="va">COWcode_2</span><span class="op">)</span>, <span class="va">year</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Removing reverse duplicates</span></span>
+<span></span>
+<span><span class="va">nd_dyadic_df2</span> <span class="op">&lt;-</span> <span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">COWcode</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">example1</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">COWcode</span>, <span class="va">year</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"year"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_1"</span>, <span class="st">"_2"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">COWcode_1</span> <span class="op">!=</span> <span class="va">COWcode_2</span><span class="op">)</span> <span class="op">|&gt;</span>    <span class="co"># Removing same country pairs</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">COWcode_1</span> <span class="op">&lt;</span> <span class="va">COWcode_2</span><span class="op">)</span>  <span class="co"># Removing reverse duplicates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section></section><section id="complete-combination" class="level2"><h2 class="anchored" data-anchor-id="complete-combination">Complete Combination</h2>
 <p>I’ve always found it difficult to distinguish the functions <code>complete</code>, <code>expand</code>, <code>nesting</code>, and <code>crossing</code> from another. In a sense, they do similar things. They find combinations of values in vectors or columns. I originally thought of writing a separate tutorial for each function, but digesting them all at once makes it easier to tell the difference between them. Let’s take some time to look into these functions. And let’s start with an overview of what they do:</p>
 <div class="cell">
@@ -875,7 +928,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p><code>expand</code>, in contrast, creates a new tibble. The tibble represents either all possible combinations of values or the unique combinations of values (with nesting). Suppose you have an incomplete tibble with months and years, in which the combination of the month “February” and the year 2013 is missing. You can use <code>expand</code> to create a complete set of years and months, including the combination of February and 2013. <code>crossing</code> works similarly to <code>expand</code>, except that it uses <em>vectors</em> to create combinations of values in a data frame. However, as we will see later, <code>expand</code> can also do this.</p>
 <p>For this tutorial, we will use a made-up data set of running events. Suppose the following data frame shows the running races a runner has completed since 2010. The minutes show the time it took this person to complete the races. Let’s call her Anna.</p>
 <div class="cell">
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">year</span>, <span class="op">~</span><span class="va">race</span>, <span class="op">~</span><span class="va">minutes</span>,</span>
 <span>  <span class="fl">2010</span>, <span class="st">"half marathon"</span>, <span class="fl">110</span>,</span>
 <span>  <span class="fl">2011</span>, <span class="st">"marathon"</span>, <span class="fl">230</span>,</span>
@@ -891,7 +944,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>Let’s assume Anna has only run 10Ks, half marathons, and marathons in recent years. Let’s further assume that she could have participated in every race each year. How many running races could she have participated in then?</p>
 <p>A first approach could be to convert the implicit combinations into explicit combinations using <code>complete</code>. This essentially means nothing more than creating new rows representing the runs in which it did not participate. For these runs, complete sets the values of the <code>minutes</code> column to <code>NA</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">race</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -905,7 +958,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>Looking at the number of rows she could have participated in 18 competitions. But could she? You might see that we are missing some years. There is no data from 2012 or 2014. This is because <code>complete</code> only works with the values that are already in the data. Since she never participated in a race in 2012, we don’t see these races.</p>
 <p>However, we can add these values if we use vectors instead of columns. Suppose we want to ensure that the data frame includes all years between 2010 and 2022 and all three running events that are already present in the data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2022</span>, <span class="va">race</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -919,7 +972,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>All combinations of values that were already present in the data did not change. However, the code added rows that were not present. In other words, it added rows with years and races that were not present in the original data frame.</p>
 <p>We could even go so far as to include new races to the data frame (i.e.&nbsp;ultra marathons):</p>
 <div class="cell">
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2022</span>, race <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">race</span>, <span class="st">"ultra marathons"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -935,7 +988,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>The <code>expand</code> function does something very similar. However, instead of adding new rows with the complete set of values, a new data frame is created only for the columns you specify in the function (compared to <code>complete</code>, where we kept the minutes column).</p>
 <p>First, let’s create a simple example. Let’s create a complete combination of years and races from the existing data frame:</p>
 <div class="cell">
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">race</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -948,7 +1001,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>The result is a new data frame. You can see that the column <code>minutes</code> is missing. Similar to <code>complete</code> we can specify a vector instead of a column, for example to make sure that the data frame covers all years from 2010 to 2022:</p>
 <div class="cell">
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2010</span><span class="op">:</span><span class="fl">2022</span>, <span class="va">race</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -961,7 +1014,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>A neat trick to complete the years is the <code>full_seq</code> function:</p>
 <div class="cell">
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq</a></span><span class="op">(</span><span class="va">year</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">race</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -975,7 +1028,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>In this case <code>full_seq</code> generated the complete set of years, starting with the lowest year in the data frame and ending with the highest year. The 1 indicates that the years should be incremented by 1 each time.</p>
 <p>So we have a handle on all the combinations of years and races in our data frame. But we are missing the actual data, namely the minutes Anna took for these races. To add this data to the data frame, we combine <code>expand</code> with <code>full_join</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">all_running_races_anna</span> <span class="op">&lt;-</span> <span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">all_running_races_anna</span> <span class="op">&lt;-</span> <span class="va">running_races_anna</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq</a></span><span class="op">(</span><span class="va">year</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">race</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">running_races_anna</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"race"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -995,7 +1048,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </h3>
 <p>Now let’s imagine Anna is running in a club with three other runners. Eva, John and Leonie.</p>
 <div class="cell">
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_club</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_club</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">year</span>, <span class="op">~</span><span class="va">runner</span>, <span class="op">~</span><span class="va">race</span>, <span class="op">~</span><span class="va">minutes</span>,</span>
 <span>  <span class="fl">2012</span>, <span class="st">"Eva"</span>, <span class="st">"half marathon"</span>, <span class="fl">109</span>,</span>
 <span>  <span class="fl">2013</span>, <span class="st">"Eva"</span>, <span class="st">"marathon"</span>, <span class="fl">260</span>,</span>
@@ -1011,7 +1064,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>Again, you want to find all races that each runner could have participated in since joining the club. If we used the same <code>expand</code> technique we just did, we will run into problems:</p>
 <div class="cell">
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">all_running_races_club</span> <span class="op">&lt;-</span> <span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">all_running_races_club</span> <span class="op">&lt;-</span> <span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq</a></span><span class="op">(</span><span class="va">year</span>, <span class="fl">1</span><span class="op">)</span>, <span class="va">race</span>, <span class="va">runner</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1024,7 +1077,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>Take John, for example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">all_running_races_club</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">all_running_races_club</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">runner</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"John"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1038,7 +1091,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>He joined the club in 2019. However, the data frame shows missed races from 2012. This is because the data frame contains the races of Eva, who joined in 2012.</p>
 <p>We can fix this problem by grouping the data frame by runners.</p>
 <div class="cell">
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">all_running_races_club_correct</span> <span class="op">&lt;-</span> <span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">all_running_races_club_correct</span> <span class="op">&lt;-</span> <span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">runner</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq</a></span><span class="op">(</span><span class="va">year</span>, <span class="fl">1</span><span class="op">)</span>, </span>
 <span>           race <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"10km"</span>, <span class="st">"half marathon"</span>, <span class="st">"marathon"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1054,7 +1107,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>With group_by we expand the rows only within the runners. If you now take a look at the data, you will notice that John has no races before 2018, which is exactly what we want.</p>
 <div class="cell">
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">all_running_races_club_correct</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">all_running_races_club_correct</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">runner</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="st">"John"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1067,7 +1120,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>Yet, we still need the actual data of the three runners. We use <code>left_join</code> to add the running times to the expanded data frame:</p>
 <div class="cell">
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">complete_running_races_club</span> <span class="op">&lt;-</span> <span class="va">all_running_races_club_correct</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">complete_running_races_club</span> <span class="op">&lt;-</span> <span class="va">all_running_races_club_correct</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">running_races_club</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"runner"</span>, <span class="st">"race"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1080,7 +1133,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>Since we already know that <code>complete</code> is a shortcut for such an analysis, we can use it instead:</p>
 <div class="cell">
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">runner</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/full_seq.html">full_seq</a></span><span class="op">(</span><span class="va">year</span>, <span class="fl">1</span><span class="op">)</span>, </span>
 <span>           race <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"10km"</span>, <span class="st">"half marathon"</span>, <span class="st">"marathon"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1097,7 +1150,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>With this data we can do some interesting analysis. We could visualize the percentage of competitions in which each runner actually participated.</p>
 <p>First, we need to find out how many races each runner has completed. To do this, we count the number of races that a runner has or has not completed:</p>
 <div class="cell">
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">count_races</span> <span class="op">&lt;-</span> <span class="va">complete_running_races_club</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">count_races</span> <span class="op">&lt;-</span> <span class="va">complete_running_races_club</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">runner</span>, <span class="va">race</span>, missed_races <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">minutes</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1111,7 +1164,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>We see that Eva has not completed a single 10-km run in the years she has been a member of the club, because there is a row missing where the <code>missed_races</code> column is set to <code>FALSE</code>.</p>
 <p>Fortunately, we have learned that we can complete an existing data frame with <code>complete</code>. Let’s do that:</p>
 <div class="cell">
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">count_races</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">count_races</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span><span class="va">runner</span>, <span class="va">race</span>, <span class="va">missed_races</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1125,7 +1178,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>The code has an interesting addition, the <code>fill</code> parameter. The parameter allows us turn <code>NA</code>s to actual values. Since we know that the missing rows represent the number of races that were or were not finish, we can be sure that they represent zero races. For Eva, for example, a row is missing for the 10km races in which she never participated.</p>
 <p>Now that we have the complete count data of races per runner, we can calculate the percentage of races they participated in. To calculate the percentages, we must first put the data into a wide format and then create a column that represents the percentages:</p>
 <div class="cell">
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">count_races</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">count_races</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span><span class="va">runner</span>, <span class="va">race</span>, <span class="va">missed_races</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">missed_races</span>, values_from <span class="op">=</span> <span class="va">n</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -1142,7 +1195,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>Let’s talk about Eva again. She participated in 0% of the 10k races and in 18.18% of the possible half marathons. Since she ran only 1 of 11 marathons, she participated in 9% of the marathons.</p>
 <p>This is how it looks for all runners:</p>
 <div class="cell">
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">count_races</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">count_races</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/complete.html">complete</a></span><span class="op">(</span><span class="va">runner</span>, <span class="va">race</span>, <span class="va">missed_races</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">missed_races</span>, values_from <span class="op">=</span> <span class="va">n</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -1153,7 +1206,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="va">runner</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="expand-with-nesting" class="level3"><h3 class="anchored" data-anchor-id="expand-with-nesting">
@@ -1161,7 +1214,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </h3>
 <p>So far, we have completed data frames for missing rows. Sometimes, however, we are interested in the unique combinations of values in a data frame. Suppose your running club has 540 members. You want to know in which competitions a runner has participated during her or his time in the club. This is basically the opposite of what we just did. Instead of finding all combinations of values we are looking for the unique combinations; in a given data frame! To find these combinations we can combine expand with nesting:</p>
 <div class="cell">
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">running_races_club</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">nesting</a></span><span class="op">(</span><span class="va">runner</span>, <span class="va">race</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
@@ -1174,7 +1227,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>Once again, you can see that Eva has never run a 10K. John has never run a half marathon or marathon. But we have to infer that information from the data frame. The data shows what happened, not what didn’t happen. To find out which runs the runners have never participated in, we can combine the code with <code>anti_join</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">full_combinations_runners</span> <span class="op">&lt;-</span> </span>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">full_combinations_runners</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">expand</a></span><span class="op">(</span><span class="va">running_races_club</span>, <span class="va">runner</span>, </span>
 <span>                race <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"10km"</span>, <span class="st">"half marathon"</span>,<span class="st">"marathon"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1194,7 +1247,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 <p>Let’s talk about tennis. Suppose you want to create a data frame that shows all Grand Slams (Australian Open, French Open, Wimbledon, US Open) from 1905 to 2022. You don’t have an existing data frame at hand, so you need to create one from scratch.</p>
 <p>For these cases you need crossing. The difference from the other functions is that crossing does not need an existing data frame. We use vectors instead:</p>
 <div class="cell">
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">crossing</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">crossing</a></span><span class="op">(</span></span>
 <span>  year <span class="op">=</span> <span class="fl">1905</span><span class="op">:</span><span class="fl">2022</span>,</span>
 <span>  major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Australien Open"</span>, <span class="st">"French Open"</span>, <span class="st">"Wimbledon"</span>, <span class="st">"US Open"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1209,7 +1262,7 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>This gives us a total of 472 Grand Slams. Similarly, we could create a data frame representing the <a href="https://en.wikipedia.org/wiki/World_Marathon_Majors">World Marathon Majors</a>, which started in 2006:</p>
 <div class="cell">
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">crossing</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">crossing</a></span><span class="op">(</span></span>
 <span>  year <span class="op">=</span> <span class="fl">2006</span><span class="op">:</span><span class="fl">2022</span>,</span>
 <span>  races <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tokyo"</span>, <span class="st">"Boston"</span>, <span class="st">"Chicago"</span>,</span>
 <span>            <span class="st">"London"</span>, <span class="st">"Berlin"</span>, <span class="st">"New York"</span><span class="op">)</span></span>
@@ -1225,11 +1278,66 @@ $ wdi_trade            &lt;dbl&gt; 47.16607, 46.69791, 50.20569, 53.48615, 53.93
 </div>
 <p>The data itself only gives us a complete set of combinations, by itself it is not very meaningful. <code>crossing</code> is usually a starting point for further analyses. Imagine if we had a data set with all the world records set at these majors. We could join the world records to this data frame to determine the percentage of races in which a world record was set at the six majors.</p>
 </section></section><section id="how-to-use-complete-expand-crossing-for-our-research" class="level2"><h2 class="anchored" data-anchor-id="how-to-use-complete-expand-crossing-for-our-research">How to Use <code>complete</code>, <code>expand</code>, <code>crossing</code> for Our Research?</h2>
-<p>Show an example using COW data and V-Dem.</p>
-<ol type="1">
-<li>How can we make a complete combination of COW country-year sets?</li>
-<li>Can we make a dyads using the functions with COW data or V-Dem?</li>
-</ol></section><section id="references" class="level2 unnumbered">
+<section id="complete-set-of-dyads-year-using-country-code" class="level3"><h3 class="anchored" data-anchor-id="complete-set-of-dyads-year-using-country-code">Complete set of dyads-year using country code</h3>
+<p>If you want to make all the country dyads between 2000 and 2020, you can use the <code>*_join()</code> functions and <code><a href="https://tidyr.tidyverse.org/reference/complete.html">complete()</a></code>, <code><a href="https://tidyr.tidyverse.org/reference/expand.html">expand()</a></code>, or <code><a href="https://tidyr.tidyverse.org/reference/expand.html">crossing()</a></code> functions together.</p>
+<p>First, using <code>codelist</code> from the <a href="https://vincentarelbundock.github.io/countrycode/">countrycode</a> package, let us make a data frame for possible set of country names from Correlates of War projects:</p>
+<div class="cell">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">country_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  cown <span class="op">=</span> <span class="fu">countrycode</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/countrycode/man/codelist.html">codelist</a></span><span class="op">$</span><span class="va">cown</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">country_set</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["cown"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"700"},{"1":"339"},{"1":"615"},{"1":"NA"},{"1":"232"},{"1":"540"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Some small islands or economic entities are excluded in the COW projects (e.g., American Samoa). Thus, we can eliminate <code>NA</code>s from the column of <code>cown</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">country_set</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">cown</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">country_set_nona</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, using <code><a href="https://tidyr.tidyverse.org/reference/expand.html">crossing()</a></code>, make a complete set of COW country code between 2000 and 2022.</p>
+<div class="cell">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html">crossing</a></span><span class="op">(</span></span>
+<span>  year <span class="op">=</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2022</span>,</span>
+<span>  cown <span class="op">=</span> <span class="va">country_set</span><span class="op">$</span><span class="va">cown</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">cown</span>, <span class="va">year</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">monadic_set</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To make a full set of directed dyads-year, using <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join()</a></code> function:</p>
+<div class="cell">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dir_dyads_set</span> <span class="op">&lt;-</span> <span class="va">monadic_set</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">monadic_set</span>, by <span class="op">=</span> <span class="st">"year"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_1"</span>, <span class="st">"_2"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cown_1</span> <span class="op">!=</span> <span class="va">cown_2</span><span class="op">)</span> <span class="co"># remove rows with the same cown_1 and cown_2</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dir_dyads_set</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["year"],"name":[1],"type":["int"],"align":["right"]},{"label":["cown_1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["cown_2"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2000","2":"2","3":"20"},{"1":"2000","2":"2","3":"31"},{"1":"2000","2":"2","3":"40"},{"1":"2000","2":"2","3":"41"},{"1":"2000","2":"2","3":"42"},{"1":"2000","2":"2","3":"51"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>You can easily manipulate a full set of non-directed dyads-year.</p>
+<div class="cell">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nondir_dyads_set</span> <span class="op">&lt;-</span> <span class="va">dir_dyads_set</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cown_1</span> <span class="op">&gt;</span> <span class="va">cown_2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">nondir_dyads_set</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["year"],"name":[1],"type":["int"],"align":["right"]},{"label":["cown_1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["cown_2"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2000","2":"20","3":"2"},{"1":"2001","2":"20","3":"2"},{"1":"2002","2":"20","3":"2"},{"1":"2003","2":"20","3":"2"},{"1":"2004","2":"20","3":"2"},{"1":"2005","2":"20","3":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section></section><section id="references" class="level2 unnumbered">
 
 </section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-dahl1971a" class="csl-entry" role="listitem">

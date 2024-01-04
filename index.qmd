@@ -83,8 +83,10 @@ theme_set(theme_minimal(base_family = "Montserrat") +
 ```
 
 ```{r}
+if (!require(broom)) install.packages("broom")
+if (!require(countrycode)) install.packages("countrycode")
 if (!require(tidyverse)) install.packages("tidyverse")
-library(tidyverse)
+library(broom);library(countrycode);library(tidyverse)
 ```
 
 ## Example Data in Use
@@ -216,9 +218,9 @@ When we use `bind_rows()` for `survey1` and `survey2`, the error message tells u
 bind_rows(survey1, survey2)
 ```
 
-This happened here because `c()` automatically assigned a type based on the values it observed. When we read in datasets, `read.csv()` and related functions will also use the values to determine the type. Differences in responses between two datasets, especially for open-response questions, can lead to different types assigned to the two datasets’ columns.
+This happened here because `c()` automatically assigned a type based on the values it observed. When we read in data sets, `read.csv()` and related functions will also use the values to determine the type. Differences in responses between two data sets, especially for open-response questions, can lead to different types assigned to the two data sets’ columns.
 
-To fix this, simply coerce the problem column in one dataset to match the type of that column in the other dataset. Then, use `bind_rows()`.
+To fix this, simply coerce the problem column in one data set to match the type of that column in the other data set. Then, use `bind_rows()`.
 
 ```{r}
 survey2b <- 
@@ -330,11 +332,22 @@ head(example1); head(example2)
 
 The `by` option is used to tell the *join* function which column(s) are used to “match” the rows of the two tables.
 
-#### First step: Find keys to join
+The function `*_join()` is used as a standalone command to create the a new `joined_data` data frame. The inputs are data frames 1 and 2 (`example1` and `example2`). If you use `left_join()`, the first data frame listed is the baseline data frame, and the second one listed is joined *to* it. If you use `right_join()`, the baseline would be the second one.
+
+The third argument `by =` is where you specify the columns in each data frame that will be used to aligns the rows in the two data frames. If the names of these columns are different, provide them within a [`c()`](https://rdrr.io/r/base/c.html) vector, where the rows are matched on the basis of common values between the keys that `example1` and `example2` share.
+
+If you are joining the data frames based on common values across multiple fields, list these fields within the [`c()`](https://rdrr.io/r/base/c.html) vector.
 
 #### Inner join
 
+**An inner join is the most *restrictive* of the joins** - it returns only rows with matches across both data frames.\
+This means that the number of rows in the baseline data frame may actually *reduce*. Adjustment of which data frame is the “baseline” (written first in the function) will not impact which rows are returned, but it will impact the column order, row order, and which identifier columns are retained.
+
 ![](images/inner_join.png)
+
+Animated example of an inner join ([image source](https://github.com/gadenbuie/tidyexplain/tree/master/images))
+
+![](images/inner-join.gif)
 
 We can see that the output has fewer rows than both of these tables, which makes sense given we’re only keeping the “intersection” between the two.
 
@@ -409,9 +422,27 @@ example1 |> drop_na(COWcode, year) |>
              by = c("COWcode" = "ccodecow", "year")) |> glimpse()
 ```
 
+#### Left join vs. Right join
+
+Animated examples of left and right joins ([image source](https://github.com/gadenbuie/tidyexplain/tree/master/images))
+
+![](images/left-join.gif)
+
+![](images/right-join.gif)
+
 #### Full join
 
+**A full join is the most *inclusive* of the joins** - it returns all rows from both data frames.
+
+If there are any rows present in one and not the other (where no match was found), the data frame will include them and become longer. `NA` missing values are used to fill-in any gaps created. As you join, watch the number of columns and rows carefully to troubleshoot case-sensitivity and exact character matches.
+
+The “baseline” data frame is the one written first in the command. Adjustment of this will not impact which records are returned by the join, but it can impact the resulting column order, row order, and which identifier columns are retained.
+
 ![](images/full_join.png)
+
+Animated example of a full join ([image source](https://github.com/gadenbuie/tidyexplain/tree/master/images))
+
+![](images/full-join.gif)
 
 ```{r}
 example1 |> drop_na(COWcode, year) |> 
@@ -429,21 +460,68 @@ example1 |> drop_na(COWcode, year) |>
 
 #### Semi join
 
+A semi join is a “filtering join” which uses another data set *not to add rows or columns, but to perform filtering*.
+
+A **semi-join keeps all observations in the baseline data frame that have a match in the secondary data frame** (but does not add new columns nor duplicate any rows for multiple matches).
+
 ![](images/clipboard-3999725691.png)
+
+Animated example of a semi join ([image source](https://github.com/gadenbuie/tidyexplain/tree/master/images))
+
+![](images/semi-join.gif)
 
 #### Anti join
 
+**The anti join is another “filtering join” that returns rows in the baseline data frame that *do not* have a match in the secondary data frame.**
+
+Common scenarios for an anti-join include identifying records not present in another data frame, troubleshooting spelling in a join (reviewing records that *should have* matched), and examining records that were excluded after another join.
+
+**As with [`right_join()`](https://dplyr.tidyverse.org/reference/mutate-joins.html) and [`left_join()`](https://dplyr.tidyverse.org/reference/mutate-joins.html), the *baseline* data frame (listed first) is important**. The returned rows are from the baseline data frame only. Notice in the gif below that row in the secondary data frame (purple row 4) is not returned even though it does not match with the baseline.
+
 ![](images/clipboard-112439528.png)
 
-### Join problems
+Animated example of an anti join ([image source](https://github.com/gadenbuie/tidyexplain/tree/master/images))
 
-### Set operations
+![](images/anti-join.gif)
 
 ## Make Dyads using Existing Data
 
-### Directed dyads
+See details in Steven Miller's post: [here](https://svmiller.com/blog/2019/01/create-country-year-dyad-year-from-country-data/). Following explanations on directed dyads-year and non-directed dyads-year come from his post.
+
+### Directed dyads-year
+
+Directed dyad-year data are useful when the researcher is interested in, say, conflict onsets in a given dyad-year and it is important who initiates the dispute. In this interpretation, “France-Germany, 1911” and “Germany-France, 1911” are importantly different observations because Germany initiated the Agadir Crisis (MID#0315) against France and that distinction matters. There is likely an application of directed dyad-year panel frames for IPE researchers interested in, say, directional trade flows.
+
+Here, I used the directed dyads-year data using `example1` and `example2`.
+
+```{r}
+dyadic_df <- example1 |> drop_na(COWcode, year) |> 
+  full_join(example1 |> drop_na(COWcode, year), by = "year", suffix = c("_1", "_2")) |> 
+  dplyr::filter(COWcode_1 != COWcode_2)   # Removing same country pairs
+
+```
 
 ### Non-directed dyads
+
+Non-directed dyad-year data are (I think) the most common form of dyad-year analyses of inter-state conflict. In other words, the distinction between who initiated a MID versus who was targeted in a MID is irrelevant. It does not matter that Germany initiated a MID against France in 1911 in Agadir. It only matters that there was one, especially between those two countries at that point in time.
+
+In practice, creating non-directed dyad-year data means `ccode1` is whichever state has the lower `ccode` in the dyad. That means the United States (`ccode == 2`) will always be first in any non-directed dyad in which it is a party and Samoa (`ccode == 990`) will never be first in any non-directed dyad in which it is a member.
+
+Once you understand that distinction, creating a non-directed dyad-year data frame from the directed dyad-year data frame is simple.
+
+```{r}
+nd_dyadic_df <- example1 |> drop_na(COWcode, year) |> 
+  full_join(example1 |> drop_na(COWcode, year), by = "year", suffix = c("_1", "_2")) |> 
+  dplyr::filter(COWcode_1 != COWcode_2) |>    # Removing same country pairs
+  dplyr::filter(!duplicated(
+    tibble(min = pmin(COWcode_1, COWcode_2),
+           max = pmax(COWcode_1, COWcode_2), year)))  # Removing reverse duplicates
+
+nd_dyadic_df2 <- example1 |> drop_na(COWcode, year) |> 
+  full_join(example1 |> drop_na(COWcode, year), by = "year", suffix = c("_1", "_2")) |> 
+  dplyr::filter(COWcode_1 != COWcode_2) |>    # Removing same country pairs
+  dplyr::filter(COWcode_1 < COWcode_2)  # Removing reverse duplicates
+```
 
 ## Complete Combination
 
@@ -720,9 +798,51 @@ The data itself only gives us a complete set of combinations, by itself it is no
 
 ## How to Use `complete`, `expand`, `crossing` for Our Research?
 
-Show an example using COW data and V-Dem.
+### Complete set of dyads-year using country code
 
-1.  How can we make a complete combination of COW country-year sets?
-2.  Can we make a dyads using the functions with COW data or V-Dem?
+If you want to make all the country dyads between 2000 and 2020, you can use the `*_join()` functions and `complete()`, `expand()`, or `crossing()` functions together.
+
+First, using `codelist` from the `{countrycode}` package, let us make a data frame for possible set of country names from Correlates of War projects:
+
+```{r}
+country_set <- tibble(
+  cown = countrycode::codelist$cown
+)
+head(country_set)
+```
+
+Some small islands or economic entities are excluded in the COW projects (e.g., American Samoa). Thus, we can eliminate `NA`s from the column of `cown`.
+
+```{r}
+country_set |> drop_na(cown) -> country_set_nona
+```
+
+Next, using `crossing()`, make a complete set of COW country code between 2000 and 2022.
+
+```{r}
+crossing(
+  year = 2000:2022,
+  cown = country_set$cown
+) |> arrange(cown, year) -> monadic_set
+```
+
+To make a full set of directed dyads-year, using `full_join()` function:
+
+```{r}
+dir_dyads_set <- monadic_set |> 
+  full_join(monadic_set, by = "year", suffix = c("_1", "_2")) |> 
+  dplyr::filter(cown_1 != cown_2) # remove rows with the same cown_1 and cown_2
+
+head(dir_dyads_set)
+```
+
+You can easily manipulate a full set of non-directed dyads-year.
+
+```{r}
+nondir_dyads_set <- dir_dyads_set |> 
+  dplyr::filter(cown_1 > cown_2)
+
+head(nondir_dyads_set)
+```
 
 ## References {.unnumbered}
